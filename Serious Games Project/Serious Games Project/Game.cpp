@@ -3,15 +3,15 @@
 
 void Game::init()
 {
-	Mojito* mojito = new Mojito();
-
 	cout << mojito->getName() << endl;
-	cout << mojito->getIngredients() << endl;
+	mojito->getIngredients();
 }
 
 void Game::update()
 {
+	string playerwords;
 
+	cin >> playerwords;
 }
 
 void Game::draw()

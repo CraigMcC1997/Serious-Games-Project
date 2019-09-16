@@ -5,14 +5,15 @@ string Mojito::getName()
 	return name;
 }
 
-string Mojito::getIngredients()
+void Mojito::getIngredients()
 {
-	string hello = "Mojito";
+		/*for (auto const& i : ingredients)
+			std::cout << i << "\n";*/
 
-		for (auto const& i : ingredients)
-			std::cout << i << "\n";
+	int size = sizeof(ingredients) / sizeof(ingredients[0]);
 
-	return hello;
+	for (int i = 0; i <= size; i++)
+		cout << ingredients[i] << endl;
 }
 
 void Mojito::addIngredient(string ingredient)

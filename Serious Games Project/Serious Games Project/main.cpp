@@ -3,7 +3,6 @@
 #include <GL/glew.h>
 #include <iostream>
 #include "Window.h"
-#include "Mojito.h"
 #include "Game.h"
 
 //#if _DEBUG
@@ -12,7 +11,6 @@
 
 
 Game game = Game();
-
 
 bool handleSDLEvent(SDL_Event const& sdlEvent)
 {
@@ -47,12 +45,12 @@ void init()
 
 void update(SDL_Event sdlEvent)
 {
-
+	game.update();
 }
 
 void draw()
 {
-
+	game.draw();
 }
 
 

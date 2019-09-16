@@ -7,7 +7,7 @@ using namespace std;
 class Game
 {
 private:
-
+	Mojito* mojito = new Mojito();
 public:
 	void init();
 	void update();
