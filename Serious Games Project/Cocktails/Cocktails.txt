@@ -1,2 +1,5 @@
-Mojito ice rum soda lime
-Daquiri rum crushed-ice lime sugar
+Classic-Mojito: 50ml-Bacardi-Blanca 12.5ml-Lime 12.5ml-Gomme Handful-Mint-Leaves crushed-ice
+Starwberry-Daquiri: 50ml-Bacardi-Raspberry 25ml-lime 25ml-sugar 25ml-stawberry-puree crushed-ice
+Pornstar-Martini: 25ml-Absolut-Vanilla 25ml-Skyy-Passionfruit 50ml-Passionfruit-puree 50ml-Orange-juice 12.5ml-Gomme betters bitters
+Zombie: 25ml-OldJ-Spiced 12.5ml-Bacardi-Blanca 12.5ml-Goslings 50ml-cranberry 25ml-pineapple bitters 12.5ml-Grenadine
+
