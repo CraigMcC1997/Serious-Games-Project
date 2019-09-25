@@ -11,23 +11,12 @@ using namespace std;
 class Game
 {
 private:
-	
-	
-
-	static int const MAX_SIZE = 9;
-	bool mouseActive = false, leftPressed = false, rightPressed = false;
-
-	string name;
-	string var1;
-	string var2;
-	string var3;
-	string var4;
-	string var5;
-	string var6;
-	string var7;
-	string var8;
-	string var9;
-	string var10;
+	static int const MAX_SIZE = 9;	//max size of the array of cocktails
+	bool mouseActive = false, leftPressed = false, rightPressed = false;	//used for mouse inputs
+	int option;
+	string randCocktail;	//selected cocktail
+	ifstream myfile;	//file which holds cocktail ingredients
+	string ingred;
 
 	string const cocktails[MAX_SIZE] =
 	{	
@@ -42,9 +31,8 @@ private:
 		"Gin N Juice"
 	};
 
-	string randCocktail;
-
-	ifstream myfile; 
+	string wrongIngredients[20] = {};
+	string correctIngredients[20] = {};
 
 public:
 	Game game() 
@@ -56,5 +44,6 @@ public:
 	void update();
 	void mouseInput();
 	void draw();
+	void createListOfIngredients();
 };
 

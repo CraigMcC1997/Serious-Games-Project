@@ -4,50 +4,52 @@
 void Game::init()
 {
 	srand(time(NULL));	//seed RNG
-	int option = (rand() % MAX_SIZE);	//find random number 
+	option = (rand() % MAX_SIZE);	//find random number 
 	randCocktail = cocktails[option];	// use random number to chose a random string from the array
-	myfile = ifstream("../Cocktails/Main Menu/"+ randCocktail + ".txt");	//finding file from directory
+	
 
 	int size = sizeof(cocktails) / sizeof(cocktails[0]);	//actual size of array
 	cout << option << endl;	//test code
-	cout << cocktails[option] << endl;	//test code
+	cout << randCocktail << endl;	//test code
 
-	////chosing a random cocktail
-	//for (int i = 0; i < size; i++)
-	//{
-	//	cout << cocktails[i] << endl;
-
-	//	
-
-	//	//cout << randCocktail << endl;
-	//}
-		
-
+	//opeing file and storing details as variables CORRECT INGREDIENTS
+	myfile = ifstream("../Cocktails/Main Menu/" + randCocktail + ".txt");	//finding file from directory
 	if (myfile.is_open())
 	{
-		while (!myfile.eof())
+		for (int i = 0; !myfile.eof(); i++)
 		{
-			myfile >> name;
-			myfile >> var1;
-			myfile >> var2;
-			myfile >> var3;
-			myfile >> var4;
-			myfile >> var5;
-			myfile >> var6;
-			myfile >> var7;
-			myfile >> var8;
-			myfile >> var9;
-			myfile >> var10;
-
-			cout << name << " " << var1 << " " << var2 << " " << var3 << " " << var4
-						<< " " << var5 << " " << var6 << " " << var7 << " " << var8 
-						 << " " << var9 << " " << var10 << " " << endl;
+			myfile >> ingred;
+			correctIngredients[i] += ingred;
+			cout << correctIngredients[i] << endl;
 		}
-
 		myfile.close();
-
 	}
 	else cout << "Unable to open file";
+
+	cout << "\n\n\n\n";
+	
+	//opeing file and storing details as variables WRONG INGREDIENTS
+	myfile = ifstream("../Cocktails/Ingredients.txt");	//finding new file from directory
+	if (myfile.is_open())
+	{
+		for (int i = 0; !myfile.eof(); i++)
+		{
+			myfile >> ingred;
+			wrongIngredients[i] += ingred;
+			cout << wrongIngredients[i] << endl;
+		}
+		myfile.close();
+	}
+	else cout << "Unable to open file";
+}
+
+void Game::createListOfIngredients()
+{
+	//	input file of ingredients and store variables as wrong ingredients array.
+	//	grab correct ingredients and store copy.
+	//	take both arrays and create a new array as a randomly generated array of ingredients
+	//	of the above two arrays (add correct ingredients to the array and then mix in randomly the wrong ingredients)
+	//	display new array for testing
 }
 
 void Game::update()
@@ -81,4 +83,3 @@ void Game::draw()
 {
 
 }
-
