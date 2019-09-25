@@ -11,6 +11,8 @@
 
 
 Game game = Game();
+POINT mousePos;	//mouse pointer
+Window* hWindow;
 
 bool handleSDLEvent(SDL_Event const& sdlEvent)
 {
@@ -43,8 +45,16 @@ void init()
 	game.init();
 }
 
-void update(SDL_Event sdlEvent)
+void update()
 {
+	GetCursorPos(&mousePos);	//tracking the mouse position
+	
+	if (mousePos.x > (hWindow->getXPos()) && mousePos.x < (hWindow->getXPos() + hWindow->getWidth()) &&		//checking if the mouse in in the window
+		mousePos.y >(hWindow->getYPos()) && mousePos.y < (hWindow->getYPos() + hWindow->getHeight()))
+	{
+		game.mouseInput();	//checking for mouse inputs
+	}
+
 	game.update();
 }
 
@@ -57,7 +67,7 @@ void draw()
 int main(int argc, char* argv[])
 {
 	SDL_GLContext glContext; // OpenGL context handle
-	Window* hWindow = new Window(800, 600, "Serious Games Project"); // window handle
+	hWindow = new Window(800, 600, "Serious Games Project"); // window handle
 
 	hWindow->setupRC(glContext);
 	SDL_Renderer* renderTarget = nullptr;
@@ -82,7 +92,7 @@ int main(int argc, char* argv[])
 			if (sdlEvent.type == SDL_QUIT)
 				running = false;
 		}
-		update(sdlEvent);
+		update();
 		draw();
 	}
 

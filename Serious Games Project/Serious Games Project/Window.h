@@ -15,5 +15,9 @@ public:
 
 	SDL_Window* setupRC(SDL_GLContext &context);
 	SDL_Window* getWindow();
+	int getXPos();
+	int getYPos();
+	int getHeight();
+	int getWidth();
 
 };

@@ -1,17 +1,21 @@
 #pragma once
-#include "Mojito.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <sstream>
 #include <time.h> 
+#include <Windows.h>
 
 using namespace std;
 
 class Game
 {
 private:
-	Mojito* mojito = new Mojito();
+	
+	
+
+	static int const MAX_SIZE = 9;
+	bool mouseActive = false, leftPressed = false, rightPressed = false;
 
 	string name;
 	string var1;
@@ -25,10 +29,17 @@ private:
 	string var9;
 	string var10;
 
-	string const cocktails[3] =
-	{	"Zombie",
+	string const cocktails[MAX_SIZE] =
+	{	
+		"Zombie",
 		"Pina Colada",
-		"Classic Mojito"
+		"Classic Mojito",
+		"Long Island Iced Tea",
+		"Russian Spy",
+		"Rumbull",
+		"El Matador",
+		"Bird Bath",
+		"Gin N Juice"
 	};
 
 	string randCocktail;
@@ -36,8 +47,14 @@ private:
 	ifstream myfile; 
 
 public:
+	Game game() 
+	{
+	
+	}
+
 	void init();
 	void update();
+	void mouseInput();
 	void draw();
 };
 

@@ -4,13 +4,13 @@
 void Game::init()
 {
 	srand(time(NULL));	//seed RNG
-	int option = (rand() % 3);	//find random number 
+	int option = (rand() % MAX_SIZE);	//find random number 
 	randCocktail = cocktails[option];	// use random number to chose a random string from the array
-	myfile = ifstream("../Cocktails/Main Menu/"+ randCocktail + ".txt");
+	myfile = ifstream("../Cocktails/Main Menu/"+ randCocktail + ".txt");	//finding file from directory
 
-	int size = sizeof(cocktails) / sizeof(cocktails[0]);
-	cout << option << endl;
-	cout << cocktails[option] << endl;
+	int size = sizeof(cocktails) / sizeof(cocktails[0]);	//actual size of array
+	cout << option << endl;	//test code
+	cout << cocktails[option] << endl;	//test code
 
 	////chosing a random cocktail
 	//for (int i = 0; i < size; i++)
@@ -52,9 +52,29 @@ void Game::init()
 
 void Game::update()
 {
-	string playerwords;
 
-	cin >> playerwords;
+}
+
+//get mouse inputs
+void Game::mouseInput()
+{
+	//left mouse button
+	if ((GetKeyState(VK_LBUTTON) & 0x80) != 0)
+	{
+		leftPressed = true;
+		cout << "left pressed" << endl;
+	}
+	else
+		leftPressed = false;
+
+	//right mouse button
+	if ((GetKeyState(VK_RBUTTON) & 0x80) != 0)
+	{
+		rightPressed = true;
+		cout << "right pressed" << endl;
+	}
+	else
+		rightPressed = false;
 }
 
 void Game::draw()

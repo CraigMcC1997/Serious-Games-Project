@@ -30,3 +30,27 @@ SDL_Window* Window::getWindow()
 {
 	return window;
 }
+
+int Window::getXPos()
+{
+	int x;
+	SDL_GetWindowPosition(window, &x, NULL);
+	return x;
+}
+
+int Window::getYPos()
+{
+	int y;
+	SDL_GetWindowPosition(window, NULL, &y);
+	return y;
+}
+
+int Window::getWidth()
+{
+	return width2;
+}
+
+int Window::getHeight()
+{
+	return height2;
+}
