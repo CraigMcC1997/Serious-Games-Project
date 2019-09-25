@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <time.h> 
 
 using namespace std;
 
@@ -24,7 +25,15 @@ private:
 	string var9;
 	string var10;
 
-	ifstream myfile = ifstream("../Cocktails/Cocktails.txt");
+	string const cocktails[3] =
+	{	"Zombie",
+		"Pina Colada",
+		"Classic Mojito"
+	};
+
+	string randCocktail;
+
+	ifstream myfile; 
 
 public:
 	void init();

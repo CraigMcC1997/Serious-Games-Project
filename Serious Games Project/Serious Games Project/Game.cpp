@@ -3,8 +3,25 @@
 
 void Game::init()
 {
-	cout << mojito->getName() << endl;
-	mojito->getIngredients();
+	srand(time(NULL));	//seed RNG
+	int option = (rand() % 3);	//find random number 
+	randCocktail = cocktails[option];	// use random number to chose a random string from the array
+	myfile = ifstream("../Cocktails/Main Menu/"+ randCocktail + ".txt");
+
+	int size = sizeof(cocktails) / sizeof(cocktails[0]);
+	cout << option << endl;
+	cout << cocktails[option] << endl;
+
+	////chosing a random cocktail
+	//for (int i = 0; i < size; i++)
+	//{
+	//	cout << cocktails[i] << endl;
+
+	//	
+
+	//	//cout << randCocktail << endl;
+	//}
+		
 
 	if (myfile.is_open())
 	{
