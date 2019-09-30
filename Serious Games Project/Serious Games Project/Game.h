@@ -14,6 +14,10 @@ private:
 	static int const MAX_SIZE = 9;	//max size of the array of cocktails
 	bool mouseActive = false, leftPressed = false, rightPressed = false;	//used for mouse inputs
 	int option;
+	int i = 0;
+	int numberOfCorrectIngredients = sizeof(correctIngredients) / sizeof(correctIngredients[0]);	//actual size of array
+	int numberOfOtherIngredients = sizeof(otherIngredients) / sizeof(otherIngredients[0]);	//actual size of array
+	int numberOfGuessingIngredients = numberOfCorrectIngredients + numberOfOtherIngredients;
 	string randCocktail;	//selected cocktail
 	ifstream myfile;	//file which holds cocktail ingredients
 	string ingred;
@@ -31,8 +35,12 @@ private:
 		"Gin N Juice"
 	};
 
-	string wrongIngredients[20] = {};
-	string correctIngredients[20] = {};
+	static const int SIZE_OF_INGREDIENTS_ARRAY = 21;
+
+	string otherIngredients[SIZE_OF_INGREDIENTS_ARRAY] = {};
+	string correctIngredients[SIZE_OF_INGREDIENTS_ARRAY] = {};
+	string guessIngredients[SIZE_OF_INGREDIENTS_ARRAY] = {};
+	
 
 public:
 	Game game() 
@@ -45,5 +53,6 @@ public:
 	void mouseInput();
 	void draw();
 	void createListOfIngredients();
+	void findCocktail();
 };
 
