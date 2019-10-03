@@ -3,77 +3,31 @@
 
 void Game::init()
 {
-	findCocktail();
-
-	//get actual size of array
-	string empty = "";
-
-	while (correctIngredients[i] != empty)
-	{
-		i++;
-	}
-	numberOfCorrectIngredients = i;
-	numberOfGuessingIngredients = numberOfCorrectIngredients + numberOfOtherIngredients;
-	i = 0;
-
+	findCorrectCocktail();
 	createListOfIngredients();
-
-	cout << "\n\n\n";
-
-
-	//!!! CHANGE TO FUNCTION !!!
-	//Finding how many duplicates exist within the array
-	for (int i = 0; i <= numberOfGuessingIngredients - 1; i++)
-	{
-		for (int j = i+1; j <= numberOfGuessingIngredients; j++)
-		{
-			if (guessIngredients[i] == guessIngredients[j])
-			{
-				cout << "DUPLICATION: " << guessIngredients[j] << endl;
-				guessIngredients[i] = "DUPLICATE";
-			}
-		}
-	}
-	
-	
-	cout << "\n\n\n";
-
-	for (int i = 0; i <= numberOfGuessingIngredients; i++)
-		cout << "ORIGINAL: " << guessIngredients[i] << endl;
+	findDuplicates();
 }
 
 void Game::createListOfIngredients()
 {
-	cout << "Guess Ingredients: " << endl;
-
-	cout << numberOfGuessingIngredients << endl;
+	findSizeOfArray();
+	inputOtherIngredients();
 
 	//take each element from the two arrays and add them to a new array
 	for (int i = 0; i <= numberOfGuessingIngredients - 1; i++)
 	{
 		ingred = correctIngredients[i];
-
 		guessIngredients[i] = ingred;
-
 		ingred = otherIngredients[i];
-
 		guessIngredients[i] = ingred;
-
-		//cout << guessIngredients[i] << endl;
 	}
 }
 
-void Game::findCocktail()
+void Game::findCorrectCocktail()
 {
 	srand(time(NULL));	//seed RNG
-	option = (rand() % MAX_SIZE);	//find random number 
+	int option = (rand() % MAX_SIZE);	//find random number 
 	randCocktail = cocktails[option];	// use random number to chose a random string from the array
-
-
-
-	cout << option << endl;	//test code
-	cout << randCocktail << endl;	//test code
-
 
 	//opeing file and storing details as variables CORRECT INGREDIENTS
 	myfile = ifstream("../Cocktails/Main Menu/" + randCocktail + ".txt");	//finding file from directory
@@ -83,14 +37,14 @@ void Game::findCocktail()
 		{
 			myfile >> ingred;
 			correctIngredients[i] = ingred;
-			cout << correctIngredients[i] << endl;
 		}
 		myfile.close();
 	}
 	else cout << "Unable to open file";
+}
 
-	cout << "\n\n\n\n";
-
+void Game::inputOtherIngredients()
+{
 	//opeing file and storing details as variables WRONG INGREDIENTS
 	myfile = ifstream("../Cocktails/Ingredients.txt");	//finding new file from directory
 	if (myfile.is_open())
@@ -103,6 +57,37 @@ void Game::findCocktail()
 		myfile.close();
 	}
 	else cout << "Unable to open file";
+}
+
+void Game::findDuplicates()
+{
+//Finding how many duplicates exist within the array
+	for (int i = 0; i <= numberOfGuessingIngredients - 1; i++)
+	{
+		for (int j = i + 1; j <= numberOfGuessingIngredients; j++)
+		{
+			if (guessIngredients[i] == guessIngredients[j])
+			{
+				cout << "DUPLICATION: " << guessIngredients[j] << endl;
+				guessIngredients[i] = "DUPLICATE";
+			}
+		}
+	}
+}
+
+//get actual size of array
+void Game::findSizeOfArray()
+{
+	string empty = "";
+	int i = 0;
+
+	while (correctIngredients[i] != empty)
+	{
+		i++;
+	}
+
+	numberOfCorrectIngredients = i;
+	numberOfGuessingIngredients = numberOfCorrectIngredients + numberOfOtherIngredients;
 }
 
 void Game::update()
