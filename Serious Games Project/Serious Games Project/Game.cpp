@@ -20,24 +20,26 @@ void Game::init()
 
 	cout << "\n\n\n";
 
-	for (int i = 0; i <= 1; i++)
+
+	//!!! CHANGE TO FUNCTION !!!
+	//Finding how many duplicates exist within the array
+	for (int i = 0; i <= numberOfGuessingIngredients - 1; i++)
 	{
-		string testString = guessIngredients[i];
-		cout << "ORIGINAL: " << testString << endl;
-
-		for (int j = 1; j <= numberOfGuessingIngredients - 1; j++)
+		for (int j = i+1; j <= numberOfGuessingIngredients; j++)
 		{
-
-			
-			//cout << "i: " << guessIngredients[i] << endl;
-			//cout << "j: " << guessIngredients[j] << endl;
-			
-			if (guessIngredients[j] == testString)
+			if (guessIngredients[i] == guessIngredients[j])
 			{
-				cout << "DUPLICATION" << endl;
+				cout << "DUPLICATION: " << guessIngredients[j] << endl;
+				guessIngredients[i] = "DUPLICATE";
 			}
 		}
 	}
+	
+	
+	cout << "\n\n\n";
+
+	for (int i = 0; i <= numberOfGuessingIngredients; i++)
+		cout << "ORIGINAL: " << guessIngredients[i] << endl;
 }
 
 void Game::createListOfIngredients()
@@ -57,7 +59,7 @@ void Game::createListOfIngredients()
 
 		guessIngredients[i] = ingred;
 
-		cout << guessIngredients[i] << endl;
+		//cout << guessIngredients[i] << endl;
 	}
 }
 
