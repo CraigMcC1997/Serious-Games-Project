@@ -8,11 +8,12 @@ An app for teaching bartenders new cocktails
 
 Current Build:
 Cocktails are stored as files in a directory
-at runtime:
- A random cocktail is chosen from the directory of cocktail text files
- A text file containing a list of cocktail ingredients is input and stored in the program
- The array of correct ingredients and the array of other ingredients are added together into one single array
- This new array is then checked for duplicates and the duplicates are "removed" (needs updated as ingredients are not actually removed)
+
+At runtime:
+ 1. A random cocktail is chosen from the directory of cocktail text files
+ 2. A text file containing a list of cocktail ingredients is input and stored in the program
+ 3. The array of correct ingredients and the array of other ingredients are added together into one single array
+ 4. This new array is then checked for duplicates and the duplicates are "removed" (needs updated as ingredients are not actually removed)
  
 Two display functions exist:
  1. Displays the correct ingredients and name of the cocktail which the user will later guess
