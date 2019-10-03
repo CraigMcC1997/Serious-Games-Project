@@ -57,5 +57,7 @@ public:
 	void createListOfIngredients();
 	void findSizeOfArray();
 	void findDuplicates();
+	void displayCorrectCocktail();
+	void displayIngredients();
 };
 

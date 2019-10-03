@@ -1,3 +1,6 @@
 ﻿  Game.cpp
-E:\repo\Serious Games Project\Serious Games Project\Game.cpp(16,12): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  main.cpp
+  Window.cpp
+  Generating Code...
+E:\repo\Serious Games Project\Serious Games Project\Game.cpp(18,12): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Serious Games Project.vcxproj -> E:\repo\Serious Games Project\Debug\Serious Games Project.exe

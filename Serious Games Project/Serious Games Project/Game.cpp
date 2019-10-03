@@ -6,6 +6,8 @@ void Game::init()
 	findCorrectCocktail();
 	createListOfIngredients();
 	findDuplicates();
+	displayCorrectCocktail();
+	displayIngredients();
 }
 
 
@@ -93,8 +95,6 @@ void Game::inputOtherIngredients()
 //from the array of all ingredients find the duplicates and "remove" them
 void Game::findDuplicates()
 {
-//!!!!UPDATE, ELEMENT IS NOT ACTUALLY REMOVED, ONLY CHANGED NAME
-
 //Finding how many duplicates exist within the array
 	for (int i = 0; i <= numberOfGuessingIngredients - 1; i++)
 	{
@@ -102,11 +102,34 @@ void Game::findDuplicates()
 		{
 			if (guessIngredients[i] == guessIngredients[j])
 			{
-				cout << "DUPLICATION: " << guessIngredients[j] << endl;
-				guessIngredients[i] = "DUPLICATE";
+				guessIngredients[i] = "DUPLICATE";	//!!!!UPDATE, ELEMENT IS NOT ACTUALLY REMOVED, ONLY CHANGED NAME
 			}
 		}
 	}
+}
+
+void Game::displayCorrectCocktail()
+{
+	int count = 1;
+
+	cout << "\n\n\n" << endl;
+	cout << "Correct Cocktail Name: " << "\n" << randCocktail << "\n" << endl;
+	cout << "Ingredients: " << endl;
+
+	for (int i = 0; i <= numberOfCorrectIngredients - 1; i++)
+	{
+		cout << count << ". " << correctIngredients[i] << endl;
+		count++;
+	}	
+}
+
+void Game::displayIngredients()
+{
+	cout << "\n\n\n" << endl;
+	cout << "List of Ingredients: " << endl;
+
+	for (int i = 0; i < numberOfGuessingIngredients; i++)
+		cout << guessIngredients[i] << endl;
 }
 
 
