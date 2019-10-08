@@ -5,6 +5,7 @@
 #include <sstream>
 #include <time.h> 
 #include <Windows.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -64,5 +65,6 @@ public:
 	void displayIngredients();
 	void saveHighScore();
 	void readHighscore();
+	void MixIngredients();
 };
 

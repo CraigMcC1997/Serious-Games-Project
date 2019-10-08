@@ -3,10 +3,9 @@
 
 void Game::init()
 {
-	saveHighScore();
-	readHighscore();
 	findCorrectCocktail();
 	createListOfIngredients();
+	MixIngredients();
 	findDuplicates();
 	displayCorrectCocktail();
 	displayIngredients();
@@ -16,8 +15,8 @@ void Game::init()
 //Find a random cocktail from the array of cocktails and save its ingredients and name
 void Game::findCorrectCocktail()
 {
-	srand(time(NULL));					//seed RNG
-	int option = (rand() % MAX_SIZE);	//find random number 
+	srand(time(NULL));					// seed RNG
+	int option = (rand() % MAX_SIZE);	// find random number 
 	randCocktail = cocktails[option];	// use random number to chose a random string from the array
 
 	//opeing file and storing details as variables CORRECT INGREDIENTS
@@ -112,9 +111,7 @@ void Game::findDuplicates()
 void Game::displayCorrectCocktail()
 {
 	int count = 1;
-
-	cout << "\n\n\n" << endl;
-	cout << "Correct Cocktail Name: " << "\n" << randCocktail << "\n" << endl;
+	cout << "\n" << "Correct Cocktail Name: " << "\n" << randCocktail << "\n" << endl;
 	cout << "Ingredients: " << endl;
 
 	for (int i = 0; i <= numberOfCorrectIngredients - 1; i++)
@@ -130,7 +127,8 @@ void Game::displayIngredients()
 	cout << "List of Ingredients: " << endl;
 
 	for (int i = 0; i < numberOfGuessingIngredients; i++)
-		cout << guessIngredients[i] << endl;
+		if (guessIngredients[i] != "DUPLICATE")
+			cout << guessIngredients[i] << endl;
 }
 
 void Game::saveHighScore()
@@ -162,10 +160,19 @@ void Game::readHighscore()
 	else cout << "Unable to open file";
 }
 
+void Game::MixIngredients()
+{
+	//!!! FIX THIS !!!
+	srand(time(NULL));					// seed RNG
+	int option = (rand() % MAX_SIZE);	// find random number 
+	random_shuffle(begin(guessIngredients), end(guessIngredients));	
+	//random_shuffle(begin(guessIngredients), end(guessIngredients), option);
+}
+
 
 void Game::update()
 {
-
+	
 }
 
 
