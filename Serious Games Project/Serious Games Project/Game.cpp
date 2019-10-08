@@ -6,9 +6,10 @@ void Game::init()
 	findCorrectCocktail();
 	createListOfIngredients();
 	MixIngredients();
-	findDuplicates();
+	removeDuplicates();
 	displayCorrectCocktail();
-	displayIngredients();
+
+	cout << "Chose which ingredients are in the cocktail displayed" << endl;
 }
 
 
@@ -93,7 +94,7 @@ void Game::inputOtherIngredients()
 
 
 //from the array of all ingredients find the duplicates and "remove" them
-void Game::findDuplicates()
+void Game::removeDuplicates()
 {
 //Finding how many duplicates exist within the array
 	for (int i = 0; i <= numberOfGuessingIngredients - 1; i++)
@@ -162,17 +163,50 @@ void Game::readHighscore()
 
 void Game::MixIngredients()
 {
-	//!!! FIX THIS !!!
-	srand(time(NULL));					// seed RNG
-	int option = (rand() % MAX_SIZE);	// find random number 
-	random_shuffle(begin(guessIngredients), end(guessIngredients));	
-	//random_shuffle(begin(guessIngredients), end(guessIngredients), option);
+	random_shuffle(begin(guessIngredients), end(guessIngredients) + numberOfCorrectIngredients);	//randomly shuffle the elements in the array	
 }
+
+void Game::chooseIngredient()
+{
+	string choice;
+
+	cin >> choice;
+
+	for (int i = 0; i <= numberOfCorrectIngredients - 1; i++)
+	{
+		if (correctIngredients[i] == choice)
+		{
+			cout << "found" << endl;
+			correctIngredients[i] = "REMOVED";
+		}
+		else
+			cout << "not found" << endl;
+	}
+}
+
+bool Game::allIngredientsFound()
+{
+	bool foundAll = false;
+
+	for (int i = 0; i <= numberOfCorrectIngredients - 1; i++)
+	{
+		if (correctIngredients[i] != "REMOVED")
+			foundAll = false;
+		else
+			foundAll = true;
+	}
+
+	return foundAll;
+}
+
 
 
 void Game::update()
 {
-	
+	displayCorrectCocktail();
+	displayIngredients();
+	chooseIngredient();
+	cout << allIngredientsFound() << endl;
 }
 
 

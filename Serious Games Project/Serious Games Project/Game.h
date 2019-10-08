@@ -14,7 +14,7 @@ class Game
 private:
 	static int const MAX_SIZE = 9;	//max size of the array of cocktails
 	bool mouseActive = false, leftPressed = false, rightPressed = false;	//used for mouse inputs
-	int numberOfCorrectIngredients = sizeof(correctIngredients) / sizeof(correctIngredients[0]);	//actual size of array
+	int numberOfCorrectIngredients;
 	int numberOfOtherIngredients = sizeof(otherIngredients) / sizeof(otherIngredients[0]);	//actual size of array
 	int numberOfGuessingIngredients = numberOfCorrectIngredients + numberOfOtherIngredients;
 
@@ -60,11 +60,13 @@ public:
 	void inputOtherIngredients();
 	void createListOfIngredients();
 	void findSizeOfArray();
-	void findDuplicates();
+	void removeDuplicates();
 	void displayCorrectCocktail();
 	void displayIngredients();
 	void saveHighScore();
 	void readHighscore();
 	void MixIngredients();
+	void chooseIngredient();
+	bool allIngredientsFound();
 };
 
