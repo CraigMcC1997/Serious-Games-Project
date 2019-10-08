@@ -3,13 +3,14 @@
 
 void Game::init()
 {
+	saveHighScore();
+	readHighscore();
 	findCorrectCocktail();
 	createListOfIngredients();
 	findDuplicates();
 	displayCorrectCocktail();
 	displayIngredients();
 }
-
 
 
 //Find a random cocktail from the array of cocktails and save its ingredients and name
@@ -20,15 +21,15 @@ void Game::findCorrectCocktail()
 	randCocktail = cocktails[option];	// use random number to chose a random string from the array
 
 	//opeing file and storing details as variables CORRECT INGREDIENTS
-	myfile = ifstream("../Cocktails/Main Menu/" + randCocktail + ".txt");	//finding file from directory
-	if (myfile.is_open())
+	infile = ifstream("../Resources/Cocktails/Main Menu/" + randCocktail + ".txt");	//finding file from directory
+	if (infile.is_open())
 	{
-		for (int i = 0; !myfile.eof(); i++)
+		for (int i = 0; !infile.eof(); i++)
 		{
-			myfile >> ingredient;
+			infile >> ingredient;
 			correctIngredients[i] = ingredient;
 		}
-		myfile.close();
+		infile.close();
 	}
 	else cout << "Unable to open file";
 }
@@ -76,15 +77,15 @@ void Game::findSizeOfArray()
 void Game::inputOtherIngredients()
 {
 	//opeing file and storing details as variables WRONG INGREDIENTS
-	myfile = ifstream("../Cocktails/Ingredients.txt");	//finding new file from directory
-	if (myfile.is_open())
+	infile = ifstream("../Resources/Cocktails/Ingredients.txt");	//finding new file from directory
+	if (infile.is_open())
 	{
-		for (int i = 0; !myfile.eof(); i++)
+		for (int i = 0; !infile.eof(); i++)
 		{
-			myfile >> ingredient;
+			infile >> ingredient;
 			otherIngredients[i] += ingredient;
 		}
-		myfile.close();
+		infile.close();
 	}
 	else cout << "Unable to open file";
 }
@@ -130,6 +131,35 @@ void Game::displayIngredients()
 
 	for (int i = 0; i < numberOfGuessingIngredients; i++)
 		cout << guessIngredients[i] << endl;
+}
+
+void Game::saveHighScore()
+{
+	readHighscore();	//read in & save the current HighScore
+
+	if (currentScore > highScore)	//check that the current score isnt bigger than the saved score
+		highScore = currentScore;	//if so, update the highscore
+
+	outFile.open("../Resources/Highscore.txt");
+	
+	if(outFile.is_open())
+		outFile << highScore;
+	else cout << "Unable to open file";
+
+	outFile.close();
+}
+
+void Game::readHighscore()
+{
+	//opeing file and storing details as variables WRONG INGREDIENTS
+	infile = ifstream("../Resources/Highscore.txt");	//finding new file from directory
+	if (infile.is_open())
+	{
+		infile >> highScore;
+		cout << highScore << endl;
+		infile.close();
+	}
+	else cout << "Unable to open file";
 }
 
 

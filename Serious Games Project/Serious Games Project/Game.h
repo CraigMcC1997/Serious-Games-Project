@@ -16,9 +16,12 @@ private:
 	int numberOfCorrectIngredients = sizeof(correctIngredients) / sizeof(correctIngredients[0]);	//actual size of array
 	int numberOfOtherIngredients = sizeof(otherIngredients) / sizeof(otherIngredients[0]);	//actual size of array
 	int numberOfGuessingIngredients = numberOfCorrectIngredients + numberOfOtherIngredients;
+
+	int highScore, currentScore;
 	
 	string randCocktail;	//selected cocktail
-	ifstream myfile;	//file which holds cocktail ingredients
+	ifstream infile;	//file which holds cocktail ingredients
+	ofstream outFile;
 	string ingredient;
 
 	string const cocktails[MAX_SIZE] =
@@ -59,5 +62,7 @@ public:
 	void findDuplicates();
 	void displayCorrectCocktail();
 	void displayIngredients();
+	void saveHighScore();
+	void readHighscore();
 };
 
