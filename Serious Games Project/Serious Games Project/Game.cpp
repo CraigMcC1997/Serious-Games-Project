@@ -6,6 +6,8 @@ void Game::init()
 	findCorrectCocktail();
 	createListOfIngredients();
 	removeDuplicates();
+	displayCorrectCocktail();
+	displayIngredients();
 
 	cout << "Chose which ingredients are in the cocktail displayed" << endl;
 }
@@ -136,15 +138,17 @@ void Game::readHighscore()
 void Game::chooseIngredient()
 {
 	string choice;
-	std::vector<string>::iterator pend;
+	std::vector<string>::iterator temp;
 
 	cin >> choice;
 
-	if (std::find(guessIngredients.begin(), guessIngredients.end(), choice) != guessIngredients.end()) {
+	if (std::find(correctIngredients.begin(), correctIngredients.end(), choice) != correctIngredients.end()) {
 		cout << "found it!" << endl;
 		
 		// std :: remove function call 
-		pend = std::remove(correctIngredients.begin(), correctIngredients.end(), choice);
+		temp = correctIngredients.erase(std::remove(correctIngredients.begin(), correctIngredients.end(), choice));
+		temp = guessIngredients.erase(std::remove(guessIngredients.begin(), guessIngredients.end(), choice));
+		//resize
 
 	}
 	else {
@@ -154,15 +158,10 @@ void Game::chooseIngredient()
 
 bool Game::allIngredientsFound()
 {
-	bool foundAll = false;
-
-	for (int i = 0; i <= numberOfCorrectIngredients - 1; i++)
-	{
-		if (correctIngredients[i] != "REMOVED")
-			foundAll = false;
-		else
-			foundAll = true;
-	}
+	if (correctIngredients.empty())
+		foundAll = true;
+	else
+		foundAll = false;
 
 	return foundAll;
 }
@@ -171,9 +170,11 @@ bool Game::allIngredientsFound()
 
 void Game::update()
 {
-	displayCorrectCocktail();
-	displayIngredients();
-	chooseIngredient();
+	if (!foundAll)
+	{
+		chooseIngredient();
+	}
+		
 	cout << allIngredientsFound() << endl;
 }
 

@@ -20,6 +20,7 @@ private:
 	int numberOfGuessingIngredients = numberOfCorrectIngredients + numberOfOtherIngredients;
 
 	int highScore, currentScore;
+	bool foundAll = false;
 	
 	string randCocktail;	//selected cocktail
 	ifstream infile;	//file which holds cocktail ingredients
