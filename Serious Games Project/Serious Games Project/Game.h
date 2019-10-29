@@ -6,6 +6,7 @@
 #include <time.h> 
 #include <Windows.h>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
@@ -40,9 +41,9 @@ private:
 
 	static const int SIZE_OF_INGREDIENTS_ARRAY = 21;
 
-	string otherIngredients[SIZE_OF_INGREDIENTS_ARRAY] = {};
-	string correctIngredients[10] = {};
-	string guessIngredients[SIZE_OF_INGREDIENTS_ARRAY] = {};
+	vector<string> otherIngredients;
+	vector<string> correctIngredients;
+	vector<string> guessIngredients;
 	
 
 public:
@@ -59,13 +60,11 @@ public:
 	void findCorrectCocktail();
 	void inputOtherIngredients();
 	void createListOfIngredients();
-	void findSizeOfArray();
 	void removeDuplicates();
 	void displayCorrectCocktail();
 	void displayIngredients();
 	void saveHighScore();
 	void readHighscore();
-	void MixIngredients();
 	void chooseIngredient();
 	bool allIngredientsFound();
 };

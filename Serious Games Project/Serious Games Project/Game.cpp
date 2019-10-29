@@ -5,9 +5,7 @@ void Game::init()
 {
 	findCorrectCocktail();
 	createListOfIngredients();
-	MixIngredients();
 	removeDuplicates();
-	displayCorrectCocktail();
 
 	cout << "Chose which ingredients are in the cocktail displayed" << endl;
 }
@@ -27,51 +25,12 @@ void Game::findCorrectCocktail()
 		for (int i = 0; !infile.eof(); i++)
 		{
 			infile >> ingredient;
-			correctIngredients[i] = ingredient;
+			correctIngredients.push_back(ingredient);
 		}
 		infile.close();
 	}
 	else cout << "Unable to open file";
 }
-
-
-
-//Create an array of all ingredients by adding the correct and other ingredient arrays together
-void Game::createListOfIngredients()
-{
-	findSizeOfArray();
-	inputOtherIngredients();
-
-	//take each element from the two arrays and add them to a new array
-	for (int i = 0; i <= numberOfGuessingIngredients - 1; i++)
-	{
-		ingredient = correctIngredients[i];
-		guessIngredients[i] = ingredient;
-		ingredient = otherIngredients[i];
-		guessIngredients[i] = ingredient;
-	}
-}
-
-
-
-
-//get actual size of array of all the ingredients
-void Game::findSizeOfArray()
-{
-	string empty = "";
-	int i = 0;
-
-	while (correctIngredients[i] != empty)
-	{
-		i++;
-	}
-
-	numberOfCorrectIngredients = i;
-	numberOfGuessingIngredients = numberOfCorrectIngredients + numberOfOtherIngredients;
-}
-
-
-
 
 //input all the ingredients from the saved file of random ingredients
 void Game::inputOtherIngredients()
@@ -83,30 +42,39 @@ void Game::inputOtherIngredients()
 		for (int i = 0; !infile.eof(); i++)
 		{
 			infile >> ingredient;
-			otherIngredients[i] += ingredient;
+			otherIngredients.push_back(ingredient);
 		}
 		infile.close();
 	}
 	else cout << "Unable to open file";
+
+	random_shuffle(otherIngredients.begin(), otherIngredients.end());
+	otherIngredients.resize(10);
+
+	cout << "SMALLER" << endl;
 }
 
 
+
+//Create an array of all ingredients by adding the correct and other ingredient arrays together
+void Game::createListOfIngredients()
+{
+	inputOtherIngredients();
+
+	guessIngredients.insert(guessIngredients.end(), correctIngredients.begin(), correctIngredients.end());
+	guessIngredients.insert(guessIngredients.end(), otherIngredients.begin(), otherIngredients.end());
+
+	random_shuffle(guessIngredients.begin(), guessIngredients.end());
+}
 
 
 //from the array of all ingredients find the duplicates and "remove" them
 void Game::removeDuplicates()
 {
-//Finding how many duplicates exist within the array
-	for (int i = 0; i <= numberOfGuessingIngredients - 1; i++)
-	{
-		for (int j = i + 1; j <= numberOfGuessingIngredients; j++)
-		{
-			if (guessIngredients[i] == guessIngredients[j])
-			{
-				guessIngredients[i] = "DUPLICATE";	//!!!!UPDATE, ELEMENT IS NOT ACTUALLY REMOVED, ONLY CHANGED NAME
-			}
-		}
-	}
+	vector<string>::iterator temp;
+	sort(guessIngredients.begin(), guessIngredients.end());	//sorting the array in order
+	temp = unique(guessIngredients.begin(), guessIngredients.end());	//removing duplicates
+	guessIngredients.resize(distance(guessIngredients.begin(), temp));	//resizing to remove duplicates memory
 }
 
 void Game::displayCorrectCocktail()
@@ -115,21 +83,25 @@ void Game::displayCorrectCocktail()
 	cout << "\n" << "Correct Cocktail Name: " << "\n" << randCocktail << "\n" << endl;
 	cout << "Ingredients: " << endl;
 
-	for (int i = 0; i <= numberOfCorrectIngredients - 1; i++)
+	for (vector<string>::const_iterator i = correctIngredients.begin(); i != correctIngredients.end(); i++)
 	{
-		cout << count << ". " << correctIngredients[i] << endl;
+		cout << count << ". " << *i << endl;
 		count++;
 	}	
 }
 
 void Game::displayIngredients()
 {
+	int count = 1;
+
 	cout << "\n\n\n" << endl;
 	cout << "List of Ingredients: " << endl;
 
-	for (int i = 0; i < numberOfGuessingIngredients; i++)
-		if (guessIngredients[i] != "DUPLICATE")
-			cout << guessIngredients[i] << endl;
+	for (vector<string>::const_iterator i = guessIngredients.begin(); i != guessIngredients.end(); i++)
+	{
+		cout << count << ". " << *i << endl;
+		count++;
+	}
 }
 
 void Game::saveHighScore()
@@ -161,26 +133,22 @@ void Game::readHighscore()
 	else cout << "Unable to open file";
 }
 
-void Game::MixIngredients()
-{
-	random_shuffle(begin(guessIngredients), end(guessIngredients) + numberOfCorrectIngredients);	//randomly shuffle the elements in the array	
-}
-
 void Game::chooseIngredient()
 {
 	string choice;
+	std::vector<string>::iterator pend;
 
 	cin >> choice;
 
-	for (int i = 0; i <= numberOfCorrectIngredients - 1; i++)
-	{
-		if (correctIngredients[i] == choice)
-		{
-			cout << "found" << endl;
-			correctIngredients[i] = "REMOVED";
-		}
-		else
-			cout << "not found" << endl;
+	if (std::find(guessIngredients.begin(), guessIngredients.end(), choice) != guessIngredients.end()) {
+		cout << "found it!" << endl;
+		
+		// std :: remove function call 
+		pend = std::remove(correctIngredients.begin(), correctIngredients.end(), choice);
+
+	}
+	else {
+		cout << "try again..." << endl;
 	}
 }
 
