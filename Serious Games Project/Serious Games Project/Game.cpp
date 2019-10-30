@@ -3,24 +3,22 @@
 
 void Game::init()
 {
-	////Label initialiser
-	//if (TTF_Init() == -1)
-	//	cout << "TTF failed to initialise." << endl;
+	//Label initialiser
+	if (TTF_Init() == -1)
+		cout << "TTF failed to initialise." << endl;
 
-	////only font used
-	//textFont = TTF_OpenFont("ARIEL.ttf", 50);
-	//if (textFont == NULL)
-	//	cout << "Failed to open font." << endl;
+	//only font used
+	textFont = TTF_OpenFont("../Resources/SoundFiles/ABOVE.ttf", 50);
+	if (textFont == NULL)
+		cout << "Failed to open font." << endl;
 
 	//Initialize default output device
 	if (!BASS_Init(-1, 44100, 0, 0, NULL))
 		cout << "Can't initialize device";
 
-	////starting the array of labels
-	//labels[0] = 0;
 
 	samples = new HSAMPLE[5];	//array of sound  files
-	samples[0] = Sound::loadSample("../Resources/SoundFiles/Jump.wav", BASS_SAMPLE_LOOP);	//adding sound files to the array to be played later in code
+	samples[0] = Sound::loadSample("../Resources/SoundFiles/Jump.wav", BASS_SAMPLE_OVER_POS);	//adding sound files to the array to be played later in code
 
 	findCorrectCocktail();
 	createListOfIngredients();
@@ -29,81 +27,11 @@ void Game::init()
 	displayIngredients();
 
 	cout << "Chose which ingredients are in the cocktail displayed" << endl;
-}
 
-//// textToTexture
-//GLuint Game::textToTexture(const char* str, GLuint textID) {
-//	GLuint texture = textID;
-//	TTF_Font* font = textFont;
-//
-//	SDL_Surface* stringImage = TTF_RenderText_Blended(font, str, { 255, 255, 255 });
-//
-//	if (stringImage == NULL) {
-//		std::cout << "String surface not created." << std::endl;
-//	}
-//
-//	if (texture == 0) {
-//		glGenTextures(1, &texture);//This avoids memory leakage, only initialise //first time 
-//	}
-//
-//	glBindTexture(GL_TEXTURE_2D, texture);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, stringImage->w, stringImage->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, stringImage->pixels);
-//	glBindTexture(GL_TEXTURE_2D, NULL);
-//
-//	SDL_FreeSurface(stringImage);
-//	return texture;
-//}
-//
-////clearing the labels text to texture
-//void Game::clearTextTexture(GLuint textID) {
-//	if (textID != NULL) {
-//		glDeleteTextures(1, &textID);
-//	}
-//}
-//
-////Loads textures
-//GLuint Game::loadBitmap(char* fname)
-//{
-//	GLuint texID;
-//	glGenTextures(1, &texID); // generate texture ID
-//
-//	// load file - using core SDL library
-//	SDL_Surface* tmpSurface;
-//	tmpSurface = SDL_LoadBMP(fname);
-//	if (!tmpSurface)
-//	{
-//		std::cout << "Error loading bitmap" << std::endl;
-//	}
-//
-//	// bind texture and set parameters
-//	glBindTexture(GL_TEXTURE_2D, texID);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-//
-//	SDL_PixelFormat* format = tmpSurface->format;
-//	GLuint externalFormat, internalFormat;
-//
-//	if (format->Amask) {
-//		internalFormat = GL_RGBA;
-//		externalFormat = (format->Rmask < format->Bmask) ? GL_RGBA : GL_BGRA;
-//	}
-//	else {
-//		internalFormat = GL_RGB;
-//		externalFormat = (format->Rmask < format->Bmask) ? GL_RGB : GL_BGR;
-//	}
-//
-//	glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, tmpSurface->w, tmpSurface->h, 0,
-//		externalFormat, GL_UNSIGNED_BYTE, tmpSurface->pixels);
-//	glGenerateMipmap(GL_TEXTURE_2D);
-//	SDL_FreeSurface(tmpSurface); // texture loaded, free the temporary buffer
-//	return texID;	// return value of texture ID
-//}
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}
 
 //Find a random cocktail from the array of cocktails and save its ingredients and name
 void Game::findCorrectCocktail()
@@ -301,8 +229,11 @@ void Game::draw(SDL_Window* window)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_CULL_FACE);
 
-	//labels[0] = textToTexture("object found!", labels[0]);
-	//glBindTexture(GL_TEXTURE_2D, labels[0]);
+	//glUseProgram(textureProgram);
+	glDisable(GL_DEPTH_TEST);	//Disable depth test for HUD label
+	
+	labels[0] = loadTexture::textToTexture("TESTING IF THIS ACTUALLY WORKS", labels[0], { 0, 0, 0 }, textFont);
+	glBindTexture(GL_TEXTURE_2D, labels[0]);
 
 	SDL_GL_SwapWindow(window); // swap buffers
 }

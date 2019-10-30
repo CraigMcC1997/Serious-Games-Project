@@ -1,6 +1,7 @@
 #pragma once
 #include <GL/glew.h>
 #include "PlaySound.h"
+#include "loadTexture.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -31,11 +32,11 @@ private:
 	ofstream outFile;
 	string ingredient;
 
-	////used for labels
-	//TTF_Font* textFont;
+	//used for labels
+	TTF_Font* textFont;
 
-	////array of Labels
-	//GLuint labels[5];
+	//array of Labels
+	GLuint labels[5];
 
 	//Used by BASS library
 	HSAMPLE* samples = NULL;
@@ -83,8 +84,8 @@ public:
 	void readHighscore();
 	void chooseIngredient();
 	bool allIngredientsFound();
-	//GLuint textToTexture(const char* str, GLuint textID);
+	GLuint textToTexture(const char* str, GLuint textID);
 	//void clearTextTexture(GLuint textID);
-	//GLuint loadBitmap(char* fname);
+	GLuint loadBitmap(char* fname);
 };
 

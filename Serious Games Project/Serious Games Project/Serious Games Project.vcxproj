@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="loadTexture.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlaySound.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -136,11 +137,9 @@
     <ClInclude Include="AbstractWindow.h" />
     <ClInclude Include="bass.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="loadTexture.h" />
     <ClInclude Include="PlaySound.h" />
     <ClInclude Include="Window.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="ABOVE.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

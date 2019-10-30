@@ -30,6 +30,9 @@
     <ClCompile Include="PlaySound.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="loadTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -47,8 +50,8 @@
     <ClInclude Include="PlaySound.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="ABOVE.ttf" />
+    <ClInclude Include="loadTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
