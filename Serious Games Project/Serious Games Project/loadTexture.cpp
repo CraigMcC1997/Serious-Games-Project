@@ -2,7 +2,8 @@
 
 using namespace std;
 
-namespace loadTexture {
+namespace loadTexture 
+{
 	GLuint loadTextures(const char *fname) {
 
 		GLuint texID;
@@ -36,7 +37,7 @@ namespace loadTexture {
 
 		glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, tmpSurface->w, tmpSurface->h, 0,
 			externalFormat, GL_UNSIGNED_BYTE, tmpSurface->pixels);
-		//glGenerateMipmap(GL_TEXTURE_2D);
+		glGenerateMipmap(GL_TEXTURE_2D);
 
 		SDL_FreeSurface(tmpSurface); // texture loaded, free the temporary buffer
 		return texID;	// return value of texture ID
@@ -45,8 +46,9 @@ namespace loadTexture {
 	// textToTexture
 	GLuint textToTexture(const char * str, GLuint textID, SDL_Color colour, TTF_Font* textFont) {
 		GLuint texture = textID;
+		TTF_Font* font = textFont;
 
-		SDL_Surface * stringImage = TTF_RenderText_Blended(textFont, str, colour);
+		SDL_Surface * stringImage = TTF_RenderText_Solid(textFont, str, colour);
 
 		if (stringImage == NULL) {
 			std::cout << "String surface not created." << std::endl;

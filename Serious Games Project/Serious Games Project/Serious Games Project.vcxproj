@@ -131,6 +131,8 @@
     <ClCompile Include="loadTexture.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlaySound.cpp" />
+    <ClCompile Include="rt3d.cpp" />
+    <ClCompile Include="rt3dObjLoader.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -139,7 +141,12 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="loadTexture.h" />
     <ClInclude Include="PlaySound.h" />
+    <ClInclude Include="rt3d.h" />
+    <ClInclude Include="rt3dObjLoader.h" />
     <ClInclude Include="Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\Resources\Fonts\ABOVE.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

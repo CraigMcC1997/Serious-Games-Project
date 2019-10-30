@@ -12,12 +12,28 @@
 #include <algorithm>
 #include <vector>
 #include <SDL_ttf.h>
+#include "rt3d.h"
+#include "rt3dObjLoader.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <stack>
 
 using namespace std;
+using namespace glm;
 
 class Game
 {
 private:
+
+	GLuint mvpShaderProgram;
+	mat4 MVP;
+	std::stack<glm::mat4> mvStack;
+	GLuint meshObjects[2];
+	GLuint meshIndexCount = 0;
+
+
+
 	static int const MAX_SIZE = 9;	//max size of the array of cocktails
 	bool mouseActive = false, leftPressed = false, rightPressed = false;	//used for mouse inputs
 	int numberOfCorrectIngredients;
@@ -37,6 +53,7 @@ private:
 
 	//array of Labels
 	GLuint labels[5];
+	GLuint textures[2];
 
 	//Used by BASS library
 	HSAMPLE* samples = NULL;
@@ -84,8 +101,5 @@ public:
 	void readHighscore();
 	void chooseIngredient();
 	bool allIngredientsFound();
-	GLuint textToTexture(const char* str, GLuint textID);
-	//void clearTextTexture(GLuint textID);
-	GLuint loadBitmap(char* fname);
 };
 

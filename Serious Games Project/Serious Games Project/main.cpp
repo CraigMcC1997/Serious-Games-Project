@@ -13,6 +13,7 @@
 Game* game;
 POINT mousePos;
 Window* hWindow;
+SDL_GLContext glContext; // OpenGL context handle
 
 bool handleSDLEvent(SDL_Event const& sdlEvent)
 {
@@ -65,10 +66,18 @@ void draw(SDL_Window* window)
 	game->draw(window);
 }
 
+void cleanUp()
+{
+	BASS_Free();
+	SDL_GL_DeleteContext(glContext);
+	SDL_DestroyWindow(hWindow->getWindow());
+	TTF_Quit();
+	SDL_Quit();
+}
 
 int main(int argc, char* argv[])
 {
-	SDL_GLContext glContext; // OpenGL context handle
+	
 	SDL_Event sdlEvent;  // variable to detect SDL events
 	SDL_Renderer* renderTarget = nullptr;
 
@@ -100,9 +109,6 @@ int main(int argc, char* argv[])
 		draw(hWindow->getWindow());
 	}
 
-	BASS_Free();
-	SDL_GL_DeleteContext(glContext);
-	SDL_DestroyWindow(hWindow->getWindow());
-	SDL_Quit();
+	cleanUp();
 	return 0;
 }
