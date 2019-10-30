@@ -1,1 +1,42 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Platform.targets(67,5): error MSB8020: The build tools for v142 (Platform Toolset = 'v142') cannot be found. To build using the v142 build tools, please install v142 build tools.  Alternatively, you may upgrade to the current Visual Studio tools by selecting the Project menu or right-click the solution, and then selecting "Retarget solution".
+﻿  Game.cpp
+  main.cpp
+  Window.cpp
+  Generating Code...
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\Serious Games Project\Game.cpp(143,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+Game.obj : error LNK2019: unresolved external symbol __imp_glBindTexture referenced in function "public: void __cdecl Game::draw(struct SDL_Window *)" (?draw@Game@@QEAAXPEAUSDL_Window@@@Z)
+Game.obj : error LNK2019: unresolved external symbol __imp_glClear referenced in function "public: void __cdecl Game::draw(struct SDL_Window *)" (?draw@Game@@QEAAXPEAUSDL_Window@@@Z)
+Game.obj : error LNK2019: unresolved external symbol __imp_glClearColor referenced in function "public: void __cdecl Game::draw(struct SDL_Window *)" (?draw@Game@@QEAAXPEAUSDL_Window@@@Z)
+Game.obj : error LNK2019: unresolved external symbol __imp_glDeleteTextures referenced in function "public: void __cdecl Game::clearTextTexture(unsigned int)" (?clearTextTexture@Game@@QEAAXI@Z)
+Game.obj : error LNK2019: unresolved external symbol __imp_glEnable referenced in function "public: void __cdecl Game::draw(struct SDL_Window *)" (?draw@Game@@QEAAXPEAUSDL_Window@@@Z)
+Game.obj : error LNK2019: unresolved external symbol __imp_glGenTextures referenced in function "public: unsigned int __cdecl Game::loadBitmap(char *)" (?loadBitmap@Game@@QEAAIPEAD@Z)
+Game.obj : error LNK2019: unresolved external symbol __imp_glTexImage2D referenced in function "public: unsigned int __cdecl Game::loadBitmap(char *)" (?loadBitmap@Game@@QEAAIPEAD@Z)
+Game.obj : error LNK2019: unresolved external symbol __imp_glTexParameteri referenced in function "public: unsigned int __cdecl Game::loadBitmap(char *)" (?loadBitmap@Game@@QEAAIPEAD@Z)
+Game.obj : error LNK2019: unresolved external symbol BASS_Init referenced in function "public: void __cdecl Game::init(void)" (?init@Game@@QEAAXXZ)
+Game.obj : error LNK2019: unresolved external symbol BASS_SampleLoad referenced in function "public: unsigned long __cdecl Game::loadSample(char *)" (?loadSample@Game@@QEAAKPEAD@Z)
+Game.obj : error LNK2019: unresolved external symbol BASS_SampleGetChannel referenced in function "public: void __cdecl Game::playSound(int)" (?playSound@Game@@QEAAXH@Z)
+Game.obj : error LNK2019: unresolved external symbol BASS_ChannelPlay referenced in function "public: void __cdecl Game::playSound(int)" (?playSound@Game@@QEAAXH@Z)
+Game.obj : error LNK2019: unresolved external symbol BASS_ChannelSetAttribute referenced in function "public: void __cdecl Game::playSound(int)" (?playSound@Game@@QEAAXH@Z)
+Game.obj : error LNK2019: unresolved external symbol SDL_RWFromFile referenced in function "public: unsigned int __cdecl Game::loadBitmap(char *)" (?loadBitmap@Game@@QEAAIPEAD@Z)
+Game.obj : error LNK2019: unresolved external symbol SDL_FreeSurface referenced in function "public: unsigned int __cdecl Game::loadBitmap(char *)" (?loadBitmap@Game@@QEAAIPEAD@Z)
+Game.obj : error LNK2019: unresolved external symbol SDL_LoadBMP_RW referenced in function "public: unsigned int __cdecl Game::loadBitmap(char *)" (?loadBitmap@Game@@QEAAIPEAD@Z)
+Game.obj : error LNK2019: unresolved external symbol SDL_GL_SwapWindow referenced in function "public: void __cdecl Game::draw(struct SDL_Window *)" (?draw@Game@@QEAAXPEAUSDL_Window@@@Z)
+Game.obj : error LNK2019: unresolved external symbol TTF_Init referenced in function "public: void __cdecl Game::init(void)" (?init@Game@@QEAAXXZ)
+Game.obj : error LNK2019: unresolved external symbol TTF_OpenFont referenced in function "public: void __cdecl Game::init(void)" (?init@Game@@QEAAXXZ)
+Game.obj : error LNK2019: unresolved external symbol TTF_RenderText_Blended referenced in function "public: unsigned int __cdecl Game::textToTexture(char const *,unsigned int)" (?textToTexture@Game@@QEAAIPEBDI@Z)
+Game.obj : error LNK2001: unresolved external symbol __imp___glewGenerateMipmap
+main.obj : error LNK2019: unresolved external symbol SDL_GetError referenced in function "void __cdecl exitFatalError(char *)" (?exitFatalError@@YAXPEAD@Z)
+main.obj : error LNK2019: unresolved external symbol SDL_DestroyWindow referenced in function SDL_main
+main.obj : error LNK2019: unresolved external symbol SDL_PollEvent referenced in function SDL_main
+main.obj : error LNK2019: unresolved external symbol SDL_CreateRenderer referenced in function SDL_main
+main.obj : error LNK2019: unresolved external symbol SDL_Quit referenced in function "void __cdecl exitFatalError(char *)" (?exitFatalError@@YAXPEAD@Z)
+main.obj : error LNK2019: unresolved external symbol __imp_glGetString referenced in function SDL_main
+main.obj : error LNK2019: unresolved external symbol __imp_glewInit referenced in function SDL_main
+main.obj : error LNK2001: unresolved external symbol __imp_glewExperimental
+Window.obj : error LNK2019: unresolved external symbol SDL_CreateWindow referenced in function "public: virtual struct SDL_Window * __cdecl Window::setupRC(void * &)" (?setupRC@Window@@UEAAPEAUSDL_Window@@AEAPEAX@Z)
+Window.obj : error LNK2019: unresolved external symbol SDL_GetWindowPosition referenced in function "public: int __cdecl Window::getXPos(void)" (?getXPos@Window@@QEAAHXZ)
+Window.obj : error LNK2019: unresolved external symbol SDL_GL_SetAttribute referenced in function "public: virtual struct SDL_Window * __cdecl Window::setupRC(void * &)" (?setupRC@Window@@UEAAPEAUSDL_Window@@AEAPEAX@Z)
+Window.obj : error LNK2019: unresolved external symbol SDL_GL_CreateContext referenced in function "public: virtual struct SDL_Window * __cdecl Window::setupRC(void * &)" (?setupRC@Window@@UEAAPEAUSDL_Window@@AEAPEAX@Z)
+Window.obj : error LNK2019: unresolved external symbol SDL_GL_SetSwapInterval referenced in function "public: virtual struct SDL_Window * __cdecl Window::setupRC(void * &)" (?setupRC@Window@@UEAAPEAUSDL_Window@@AEAPEAX@Z)
+Window.obj : error LNK2019: unresolved external symbol SDL_Init referenced in function "public: virtual struct SDL_Window * __cdecl Window::setupRC(void * &)" (?setupRC@Window@@UEAAPEAUSDL_Window@@AEAPEAX@Z)
+MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\x64\Debug\Serious Games Project.exe : fatal error LNK1120: 36 unresolved externals

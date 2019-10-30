@@ -1,12 +1,16 @@
 #pragma once
+#include <GL/glew.h>
+#include "bass.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <sstream>
 #include <time.h> 
 #include <Windows.h>
+#include <mmsystem.h>
 #include <algorithm>
 #include <vector>
+#include <SDL_ttf.h>
 
 using namespace std;
 
@@ -26,6 +30,17 @@ private:
 	ifstream infile;	//file which holds cocktail ingredients
 	ofstream outFile;
 	string ingredient;
+
+	////used for labels
+	//TTF_Font* textFont;
+
+	////array of Labels
+	//GLuint labels[5];
+
+	////Used by BASS library
+	//HSAMPLE* samples = NULL;
+
+	bool allowPlay = true;
 
 	string const cocktails[MAX_SIZE] =
 	{	
@@ -56,7 +71,7 @@ public:
 	void init();
 	void update();
 	void mouseInput();
-	void draw();
+	void draw(SDL_Window* window);
 
 	void findCorrectCocktail();
 	void inputOtherIngredients();
@@ -68,5 +83,10 @@ public:
 	void readHighscore();
 	void chooseIngredient();
 	bool allIngredientsFound();
+	//GLuint textToTexture(const char* str, GLuint textID);
+	//void clearTextTexture(GLuint textID);
+	//HSAMPLE loadSample(char* filename);
+	//GLuint loadBitmap(char* fname);
+	//void playSound(int sound);
 };
 

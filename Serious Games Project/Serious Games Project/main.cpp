@@ -58,9 +58,9 @@ void update()
 	game.update();
 }
 
-void draw()
+void draw(SDL_Window* window)
 {
-	game.draw();
+	game.draw(window);
 }
 
 
@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
 				running = false;
 		}
 		update();
-		draw();
+		draw(hWindow->getWindow());
 	}
 
 	SDL_DestroyWindow(hWindow->getWindow());
