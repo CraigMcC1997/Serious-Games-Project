@@ -1,6 +1,6 @@
 #pragma once
 #include <GL/glew.h>
-#include "bass.h"
+#include "PlaySound.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -37,8 +37,8 @@ private:
 	////array of Labels
 	//GLuint labels[5];
 
-	////Used by BASS library
-	//HSAMPLE* samples = NULL;
+	//Used by BASS library
+	HSAMPLE* samples = NULL;
 
 	bool allowPlay = true;
 
@@ -69,7 +69,7 @@ public:
 	}
 
 	void init();
-	void update();
+	void update(SDL_Event sdlEvent);
 	void mouseInput();
 	void draw(SDL_Window* window);
 
@@ -85,8 +85,6 @@ public:
 	bool allIngredientsFound();
 	//GLuint textToTexture(const char* str, GLuint textID);
 	//void clearTextTexture(GLuint textID);
-	//HSAMPLE loadSample(char* filename);
 	//GLuint loadBitmap(char* fname);
-	//void playSound(int sound);
 };
 

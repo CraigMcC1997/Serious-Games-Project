@@ -10,8 +10,8 @@
 //#endif
 
 
-Game game = Game();
-POINT mousePos;	//mouse pointer
+Game* game;
+POINT mousePos;
 Window* hWindow;
 
 bool handleSDLEvent(SDL_Event const& sdlEvent)
@@ -42,35 +42,39 @@ void exitFatalError(char* message)
 
 void init()
 {
-	game.init();
+	game = new Game();
+	game->init();
 }
 
-void update()
+void update(SDL_Event sdlEvent)
 {
+	game->update(sdlEvent);
+
 	GetCursorPos(&mousePos);	//tracking the mouse position
 	
+
 	if (mousePos.x > (hWindow->getXPos()) && mousePos.x < (hWindow->getXPos() + hWindow->getWidth()) &&		//checking if the mouse in in the window
 		mousePos.y >(hWindow->getYPos()) && mousePos.y < (hWindow->getYPos() + hWindow->getHeight()))
 	{
-		game.mouseInput();	//checking for mouse inputs
+		game->mouseInput();	//checking for mouse inputs
 	}
-
-	game.update();
 }
 
 void draw(SDL_Window* window)
 {
-	game.draw(window);
+	game->draw(window);
 }
 
 
 int main(int argc, char* argv[])
 {
 	SDL_GLContext glContext; // OpenGL context handle
+	SDL_Event sdlEvent;  // variable to detect SDL events
+	SDL_Renderer* renderTarget = nullptr;
+
 	hWindow = new Window(800, 600, "Serious Games Project"); // window handle
 
 	hWindow->setupRC(glContext);
-	SDL_Renderer* renderTarget = nullptr;
 	renderTarget = SDL_CreateRenderer(hWindow->getWindow(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 	glewExperimental = GL_TRUE;
@@ -83,19 +87,21 @@ int main(int argc, char* argv[])
 
 	init();
 
-	SDL_Event sdlEvent;	// variable to detect SDL events
 	bool running = true;
 	while (running)
+
 	{	// the event loop
 		while (SDL_PollEvent(&sdlEvent))
 		{
 			if (sdlEvent.type == SDL_QUIT)
 				running = false;
 		}
-		update();
+		update(sdlEvent);
 		draw(hWindow->getWindow());
 	}
 
+	BASS_Free();
+	SDL_GL_DeleteContext(glContext);
 	SDL_DestroyWindow(hWindow->getWindow());
 	SDL_Quit();
 	return 0;

@@ -19,5 +19,4 @@ public:
 	int getYPos();
 	int getHeight();
 	int getWidth();
-
 };

@@ -12,19 +12,15 @@ void Game::init()
 	//if (textFont == NULL)
 	//	cout << "Failed to open font." << endl;
 
-	////Initialize default output device
-	//if (!BASS_Init(-1, 44100, 0, 0, NULL))
-	//	cout << "Can't initialize device";
-
-	////array of sound  files
-	//samples = new HSAMPLE[2];
+	//Initialize default output device
+	if (!BASS_Init(-1, 44100, 0, 0, NULL))
+		cout << "Can't initialize device";
 
 	////starting the array of labels
 	//labels[0] = 0;
 
-	//adding sound files to the array to be played later in code
-	//samples[0] = loadSample("SoundFiles/jump.wav");
-	//samples[1] = loadSample("SoundFiles/walk.wav");
+	samples = new HSAMPLE[5];	//array of sound  files
+	samples[0] = Sound::loadSample("../Resources/SoundFiles/Jump.wav", BASS_SAMPLE_LOOP);	//adding sound files to the array to be played later in code
 
 	findCorrectCocktail();
 	createListOfIngredients();
@@ -107,34 +103,6 @@ void Game::init()
 //	glGenerateMipmap(GL_TEXTURE_2D);
 //	SDL_FreeSurface(tmpSurface); // texture loaded, free the temporary buffer
 //	return texID;	// return value of texture ID
-//}
-//
-////Loads the sound files
-//HSAMPLE Game::loadSample(char* filename)
-//{
-//	HSAMPLE sam;
-//	if (sam = BASS_SampleLoad(FALSE, filename, 0, 0, 3, BASS_SAMPLE_OVER_POS))
-//		cout << "sample " << filename << " loaded!" << endl;
-//	else
-//	{
-//		cout << "Can't load sample";
-//		exit(0);
-//	}
-//	return sam;
-//}
-//
-////playing the jumping sound effect
-//void Game::playSound(int sound)
-//{
-//	if (allowPlay) {
-//		allowPlay = false;
-//		HCHANNEL ch = BASS_SampleGetChannel(samples[sound], FALSE);
-//		BASS_ChannelSetAttribute(ch, BASS_ATTRIB_FREQ, 0);
-//		BASS_ChannelSetAttribute(ch, BASS_ATTRIB_VOL, 0.5);
-//		BASS_ChannelSetAttribute(ch, BASS_ATTRIB_PAN, -1);
-//		if (!BASS_ChannelPlay(ch, FALSE))
-//			cout << "Can't play sample" << endl;
-//	}
 //}
 
 //Find a random cocktail from the array of cocktails and save its ingredients and name
@@ -290,18 +258,15 @@ bool Game::allIngredientsFound()
 	return foundAll;
 }
 
-
-
-void Game::update()
+void Game::update(SDL_Event sdlEvent)
 {
-	if (!foundAll)
-	{
-		chooseIngredient();
-	}
-	cout << allIngredientsFound() << endl;
+	//!!!!! BREAKS WINDOW !!!!!1
+	//if (!foundAll)
+	//{
+	//	chooseIngredient();
+	//}
+	//cout << allIngredientsFound() << endl;
 }
-
-
 
 
 //get mouse inputs
@@ -311,7 +276,7 @@ void Game::mouseInput()
 	if ((GetKeyState(VK_LBUTTON) & 0x80) != 0)
 	{
 		leftPressed = true;
-		//cout << "left pressed" << endl;
+		Sound::playSample(samples[0]);
 	}
 	else
 		leftPressed = false;
