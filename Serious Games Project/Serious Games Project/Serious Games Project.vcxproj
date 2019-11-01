@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cocktail.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="loadTexture.cpp" />
     <ClCompile Include="main.cpp" />
@@ -138,6 +139,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractWindow.h" />
     <ClInclude Include="bass.h" />
+    <ClInclude Include="Cocktail.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="loadTexture.h" />
     <ClInclude Include="PlaySound.h" />

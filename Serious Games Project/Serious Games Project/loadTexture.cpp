@@ -44,9 +44,15 @@ namespace loadTexture
 	}
 
 	// textToTexture
-	GLuint textToTexture(const char * str, GLuint textID, SDL_Color colour, TTF_Font* textFont) {
+	GLuint textToTexture(const char * str, GLuint textID) {
 		GLuint texture = textID;
-		TTF_Font* font = textFont;
+		
+		//only font used
+		TTF_Font* textFont = TTF_OpenFont("../Resources/Fonts/ABOVE.ttf", 28);
+		if (textFont == NULL)
+			cout << "Failed to open font." << endl;
+
+		SDL_Color colour = {255, 255, 255};
 
 		SDL_Surface * stringImage = TTF_RenderText_Solid(textFont, str, colour);
 

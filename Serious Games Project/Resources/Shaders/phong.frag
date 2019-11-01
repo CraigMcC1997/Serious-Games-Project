@@ -1,5 +1,4 @@
-// Phong fragment shader phong.frag
-// matched with phong.vert
+// Phong fragment shader phong-tex.frag matched with phong-tex.vert
 #version 330
 
 // Some drivers require the following
@@ -22,13 +21,16 @@ struct materialStruct
 
 uniform lightStruct light;
 uniform materialStruct material;
+uniform sampler2D textureUnit0;
 
 in vec3 ex_N;
 in vec3 ex_V;
 in vec3 ex_L;
-out vec4 out_Color;
+in vec2 ex_TexCoord;
+layout(location = 0) out vec4 out_Color;
  
-void main(void) {    
+void main(void) {
+    
 	// Ambient intensity
 	vec4 ambientI = light.ambient * material.ambient;
 
@@ -44,5 +46,6 @@ void main(void) {
 	specularI = specularI * pow(max(dot(R,ex_V),0), material.shininess);
 
 	// Fragment colour
-	out_Color = (ambientI + diffuseI + specularI);
+	out_Color = (ambientI + diffuseI + specularI) * texture(textureUnit0, ex_TexCoord);
+	//out_Color = texture2D(textureUnit0, ex_TexCoord);
 }

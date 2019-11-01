@@ -77,7 +77,6 @@ void cleanUp()
 
 int main(int argc, char* argv[])
 {
-	
 	SDL_Event sdlEvent;  // variable to detect SDL events
 	SDL_Renderer* renderTarget = nullptr;
 

@@ -15,7 +15,7 @@
 
 namespace loadTexture {
 	GLuint loadTextures(const char *fname);
-	GLuint textToTexture(const char * str, GLuint textID, SDL_Color, TTF_Font*);
+	GLuint textToTexture(const char * str, GLuint textID);
 	void clearTextTexture(GLuint textID);
 	GLuint loadCubeMap(const char *fname[6], GLuint *texID);
 };
