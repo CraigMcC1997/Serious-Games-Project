@@ -1,29 +1,10 @@
 #include "Game.h"
 
-GLfloat colours[] = { 1.0f, 0.0f, 0.0f,
-					0.0f, 1.0f, 0.0f,
-					0.0f, 0.0f, 1.0f,
-					0.0f, 1.0f, 0.0f,
-					1.0f, 0.0f, 0.0f,
-					0.0f, 0.0f, 1.0f
-};
-
-
-GLfloat vertices6[] = { 0.0f, 1.0f, 0.0f,
-						1.0f, 1.0f, 0.0f,
-						0.0f, 0.0f, 0.0f,
-						1.0f, 1.0f, 0.0f,
-						1.0f, 0.0f, 0.0f,
-						0.0f, 0.0f, 0.0f
-};
-
 void Game::init()
 {
-	shaderProgram = rt3d::initShaders("../Resources/Shaders/minimal.vert", "../Resources/Shaders/minimal.frag");
-	meshObjects[0] = rt3d::createColourMesh(4, vertices6, colours);
 
-	samples = new HSAMPLE[5];	//array of sound  files
-	samples[0] = Sound::loadSample("../Resources/SoundFiles/Jump.wav", BASS_SAMPLE_OVER_POS);	//adding sound files to the array to be played later in code
+	//samples = new HSAMPLE[5];	//array of sound  files
+	//samples[0] = Sound::loadSample("../Resources/SoundFiles/Jump.wav", BASS_SAMPLE_OVER_POS);	//adding sound files to the array to be played later in code
 
 	cocktail->init();
 
@@ -59,10 +40,10 @@ void Game::readHighscore()
 	else cout << "Unable to open file";
 }
 
-void Game::update(SDL_Event sdlEvent)
+void Game::update()
 {
 	cout << "test" << endl;
-	cocktail->update(sdlEvent);
+	cocktail->update();
 }
 
 
@@ -90,15 +71,14 @@ void Game::mouseInput()
 
 
 
-void Game::draw(SDL_Window* window)
+
+void Game::draw()
 {
 	// clear the screen
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT);	
+		
+	cocktail->draw();
 
-	cocktail->draw(window);
-
-	rt3d::drawMesh(meshObjects[0], 6, GL_TRIANGLES);
-
-	SDL_GL_SwapWindow(window); // swap buffers
+	//SDL_GL_SwapWindow(window); // swap buffers
 }

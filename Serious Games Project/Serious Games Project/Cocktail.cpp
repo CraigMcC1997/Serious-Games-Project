@@ -14,10 +14,10 @@ void Cocktail::findCorrectCocktail()
 {
 	srand(time(NULL));					// seed RNG
 	int option = (rand() % MAX_SIZE);	// find random number 
-	randCocktail = cocktails[option];	// use random number to chose a random string from the array
+	name = cocktails[option];	// use random number to chose a random string from the array
 
 	//opeing file and storing details as variables CORRECT INGREDIENTS
-	infile = ifstream("../Resources/Cocktails/Main Menu/" + randCocktail + ".txt");	//finding file from directory
+	infile = ifstream("../Resources/Cocktails/Main Menu/" + name + ".txt");	//finding file from directory
 	if (infile.is_open())
 	{
 		for (int i = 0; !infile.eof(); i++)
@@ -78,7 +78,7 @@ void Cocktail::removeDuplicates()
 void Cocktail::displayCorrectCocktail()
 {
 	int count = 1;
-	cout << "\n" << "Correct Cocktail Name: " << "\n" << randCocktail << "\n" << endl;
+	cout << "\n" << "Correct Cocktail Name: " << "\n" << name << "\n" << endl;
 	cout << "Ingredients: " << endl;
 
 	for (vector<string>::const_iterator i = correctIngredients.begin(); i != correctIngredients.end(); i++)
@@ -91,15 +91,34 @@ void Cocktail::displayCorrectCocktail()
 void Cocktail::displayIngredients()
 {
 	int count = 1;
+	int x = 0;
+	int y = glutGet(GLUT_WINDOW_HEIGHT) - 100;
 
-	cout << "\n\n\n" << endl;
-	cout << "List of Ingredients: " << endl;
 
-	for (vector<string>::const_iterator i = guessIngredients.begin(); i != guessIngredients.end(); i++)
+	drawString(GLUT_BITMAP_HELVETICA_18, x, y, "Possible Ingredients: ");
+
+
+	for (int i = 0; i < guessIngredients.size(); i++)
 	{
-		cout << count << ". " << *i << endl;
-		count++;
+		if (y > glutGet(GLUT_WINDOW_HEIGHT) /2)
+		{
+			y -= 30;
+			drawString(GLUT_BITMAP_HELVETICA_18, x, y, count + ". " + guessIngredients[i]);
+		}
+		else
+		{
+			y = glutGet(GLUT_WINDOW_HEIGHT) - 100;
+			x += 300;
+		}
 	}
+}
+
+//Takes a font, position and text and draws this to screen
+void Cocktail::drawString(void* font, float x, float y, string s)
+{
+	glRasterPos3f(x, y, 0.0);
+	for (char i = 0; i < s.length(); ++i)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, s[i]);
 }
 
 void Cocktail::chooseIngredient()
@@ -141,13 +160,26 @@ bool Cocktail::allIngredientsFound()
 	return foundAll;
 }
 
-void Cocktail::update(SDL_Event sdlEvent)
+string Cocktail::getName()
 {
-	chooseIngredient();
+	return name;
+}
+
+vector<string> Cocktail::getIngredients()
+{
+	return guessIngredients;
+}
+
+void Cocktail::update()
+{
+	//chooseIngredient();
 	//allIngredientsFound();
 }
 
-void Cocktail::draw(SDL_Window* window)
+void Cocktail::draw()
 {
+	if (name.length() > 0)
+		drawString(GLUT_BITMAP_HELVETICA_18, 0, glutGet(GLUT_WINDOW_HEIGHT) - 30, "Name: " + name);
 
+	displayIngredients();
 }

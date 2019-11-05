@@ -1,4 +1,6 @@
 #pragma once
+#include <GL/glew.h>
+#include <glut.h>
 #include <string>
 #include <vector>
 #include <iostream>
@@ -14,7 +16,7 @@ using namespace std;
 class Cocktail
 {
 private:
-	string randCocktail;	//selected cocktail
+	string name;	//selected cocktail
 	ifstream infile;	//file which holds cocktail ingredients
 	ofstream outFile;
 	string ingredient;
@@ -45,8 +47,8 @@ private:
 
 public:
 	void init();
-	void update(SDL_Event sdlEvent);
-	void draw(SDL_Window* window);
+	void update();
+	void draw();
 
 	void findCorrectCocktail();
 	void inputOtherIngredients();
@@ -56,5 +58,9 @@ public:
 	void displayIngredients();
 	void chooseIngredient();
 	bool allIngredientsFound();
+
+	string getName();
+	vector<string> getIngredients();
+	void drawString(void* font, float x, float y, string s);
 };
 

@@ -76,12 +76,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Dev\SDL2-2.0.10\include;C:\Dev\SDL2_ttf-2.0.14;C:\Dev\SDL2_image-2.0.5\include;C:\Dev\glm;C:\Dev\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Dev\glut;C:\Dev\SDL2-2.0.10\include;C:\Dev\SDL2_ttf-2.0.14;C:\Dev\glm;C:\Dev\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\Dev\SDL2-2.0.10\lib\x86;C:\Dev\SDL2_ttf-2.0.14\VisualC\Win32\Debug;C:\Dev\SDL2_image-2.0.5\lib\x86;C:\Dev\glew-2.1.0\src\lib\Debug\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32d.lib;opengl32.lib;SDL2_image.lib;SDL2_ttf.lib;bass.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Dev\glut;C:\Dev\SDL2-2.0.10\lib\x86;C:\Dev\SDL2_ttf-2.0.14\VisualC\Win32\Debug;C:\Dev\glew-2.1.0\src\lib\Debug\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32d.lib;opengl32.lib;SDL2_ttf.lib;bass.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -129,11 +129,8 @@
   <ItemGroup>
     <ClCompile Include="Cocktail.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="loadTexture.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlaySound.cpp" />
-    <ClCompile Include="rt3d.cpp" />
-    <ClCompile Include="rt3dObjLoader.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -141,10 +138,7 @@
     <ClInclude Include="bass.h" />
     <ClInclude Include="Cocktail.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="loadTexture.h" />
     <ClInclude Include="PlaySound.h" />
-    <ClInclude Include="rt3d.h" />
-    <ClInclude Include="rt3dObjLoader.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
