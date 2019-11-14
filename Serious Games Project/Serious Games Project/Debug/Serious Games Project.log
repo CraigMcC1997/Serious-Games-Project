@@ -1,10 +1,10 @@
 ﻿  Cocktail.cpp
 E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\Serious Games Project\Cocktail.cpp(15,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\Serious Games Project\Cocktail.cpp(98,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\Serious Games Project\Cocktail.cpp(98,39): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\Serious Games Project\Cocktail.cpp(101,20): warning C4018: '<': signed/unsigned mismatch
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\Serious Games Project\Cocktail.cpp(107,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\Serious Games Project\Cocktail.cpp(107,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\Serious Games Project\Cocktail.cpp(121,21): warning C4018: '<': signed/unsigned mismatch
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\Serious Games Project\Cocktail.cpp(183,71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\Serious Games Project\Cocktail.cpp(97,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\Serious Games Project\Cocktail.cpp(97,39): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\Serious Games Project\Cocktail.cpp(100,20): warning C4018: '<': signed/unsigned mismatch
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\Serious Games Project\Cocktail.cpp(105,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\Serious Games Project\Cocktail.cpp(105,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\Serious Games Project\Cocktail.cpp(119,21): warning C4018: '<': signed/unsigned mismatch
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\Serious Games Project\Cocktail.cpp(174,71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Serious Games Project.vcxproj -> E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\Repo\Serious Games Project\Debug\Serious Games Project.exe

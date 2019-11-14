@@ -55,6 +55,7 @@ void Game::mouseInput()
 	{
 		leftPressed = true;
 		Sound::playSample(samples[0]);
+		cocktail->removeIngredient("Milk");
 	}
 	else
 		leftPressed = false;
@@ -75,7 +76,7 @@ void Game::mouseInput()
 void Game::draw()
 {
 	// clear the screen
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+	glClearColor(0.0f, 0.0, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);	
 		
 	cocktail->draw();

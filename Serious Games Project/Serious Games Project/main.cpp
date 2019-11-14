@@ -61,7 +61,7 @@ void init()
 
 void update()
 {
-	//game->update();
+	game->update();
 
 	GetCursorPos(&mousePos);	//tracking the mouse position
 	
@@ -94,7 +94,8 @@ void cleanUp()
 	BASS_Free();
 }
 
-void mouse(int button, int state, int x, int y) {
+void mouse(int button, int state, int x, int y) 
+{
 	if (!state) {
 		glutPostRedisplay();
 	}

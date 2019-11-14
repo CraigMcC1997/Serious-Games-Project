@@ -53,7 +53,6 @@ void Cocktail::inputOtherIngredients()
 }
 
 
-
 //Create an array of all ingredients by adding the correct and other ingredient arrays together
 void Cocktail::createListOfIngredients()
 {
@@ -121,26 +120,6 @@ void Cocktail::drawString(void* font, float x, float y, string s)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, s[i]);
 }
 
-void Cocktail::chooseIngredient()
-{
-	string choice;
-	std::vector<string>::iterator temp;
-
-	cin >> choice;
-
-	if (std::find(correctIngredients.begin(), correctIngredients.end(), choice) != correctIngredients.end()) {
-		cout << "found it!" << endl;
-
-		// std :: remove function call 
-		temp = correctIngredients.erase(std::remove(correctIngredients.begin(), correctIngredients.end(), choice));
-		temp = guessIngredients.erase(std::remove(guessIngredients.begin(), guessIngredients.end(), choice));
-		//resize
-
-	}
-	else {
-		cout << "try again..." << endl;
-	}
-}
 
 bool Cocktail::allIngredientsFound()
 {
@@ -156,8 +135,21 @@ bool Cocktail::allIngredientsFound()
 		cout << "Keep going" << endl;
 	}
 		
-
 	return foundAll;
+}
+
+void Cocktail::removeIngredient(string choice)
+{
+	std::vector<string>::iterator temp;
+
+	if (std::find(correctIngredients.begin(), correctIngredients.end(), choice) != correctIngredients.end()) 
+	{
+		//remove ingredient from containers 
+		temp = correctIngredients.erase(std::remove(correctIngredients.begin(), correctIngredients.end(), choice));
+		temp = guessIngredients.erase(std::remove(guessIngredients.begin(), guessIngredients.end(), choice));
+		//resize
+		guessIngredients.resize(std::distance(guessIngredients.begin(), temp));	//resizing to remove duplicates memory
+	}
 }
 
 string Cocktail::getName()

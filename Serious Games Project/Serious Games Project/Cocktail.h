@@ -56,9 +56,8 @@ public:
 	void removeDuplicates();
 	void displayCorrectCocktail();
 	void displayIngredients();
-	void chooseIngredient();
 	bool allIngredientsFound();
-
+	void removeIngredient(string choice);
 	string getName();
 	vector<string> getIngredients();
 	void drawString(void* font, float x, float y, string s);
