@@ -18,7 +18,7 @@ int refreshMillis = 16;
 
 void init()
 {
-	glClearColor(0.0, 0.0, 0.7, 1.0); // Set background (clear) color to black
+	glClearColor(0.0, 0.0, 0.0, 1.0); // Set background (clear) color to black
 }
 
 void draw()
