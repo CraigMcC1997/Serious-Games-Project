@@ -8,8 +8,9 @@ void Game::init()
 	window = new WindowMaker("Serious Games Coursework", 800, 600,
 		glutGet(GLUT_SCREEN_WIDTH) / 2 - windowWidth / 2, glutGet(GLUT_SCREEN_HEIGHT) / 2 - windowHeight / 2); //placing the window in the middle of the monitor
 
-	//samples = new HSAMPLE[5];	//array of sound  files
-	//samples[0] = Sound::loadSample("../Resources/SoundFiles/Jump.wav", BASS_SAMPLE_OVER_POS);	//adding sound files to the array to be played later in code
+	samples = new HSAMPLE[5];	//array of sound  files
+	samples[0] = Sound::loadSample("../Resources/SoundFiles/Click.wav", BASS_SAMPLE_OVER_POS);	//adding sound files to the array to be played later in code
+	samples[1] = Sound::loadSample("../Resources/SoundFiles/Click2.wav", BASS_SAMPLE_OVER_POS);	//adding sound files to the array to be played later in code
 
 	cocktail->init();
 
@@ -45,8 +46,6 @@ void Game::readHighscore()
 	else cout << "Unable to open file";
 }
 
-
-
 void Game::update(float dt)
 {
 	POINT mousePos;
@@ -60,11 +59,7 @@ void Game::update(float dt)
 	{
 		//get mouse inputs
 		mouseInput();
-
-		cout << "test" << endl;
 	}
-
-	glutPostRedisplay();
 }
 
 
@@ -74,10 +69,13 @@ void Game::mouseInput()
 	//left mouse button
 	if ((GetKeyState(VK_LBUTTON) & 0x80) != 0)
 	{
-		leftPressed = true;
-		cout << "left pressed" << endl;
-		Sound::playSample(samples[0]);
-		cocktail->removeIngredient("Lime");
+		if (!leftPressed)
+		{
+			leftPressed = true;
+			cout << "left pressed" << endl;
+			Sound::playSample(samples[0]);
+			cocktail->removeIngredient("Lime");
+		}
 	}
 	else
 		leftPressed = false;
@@ -85,8 +83,13 @@ void Game::mouseInput()
 	//right mouse button
 	if ((GetKeyState(VK_RBUTTON) & 0x80) != 0)
 	{
-		rightPressed = true;
-		cout << "right pressed" << endl;
+		if (!rightPressed)
+		{
+			rightPressed = true;
+			cout << "right pressed" << endl;
+			Sound::playSample(samples[1]);
+			cocktail->removeIngredient("Lime");
+		}
 	}
 	else
 		rightPressed = false;
@@ -98,13 +101,13 @@ void Game::ReshapeWindow(int width, int height)
 	window->Reshape(width, height);
 }
 
-
 void Game::draw()
 {
 	// clear the screen
-	glClearColor(0.0f, 0.0, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);	
+	glClear(GL_COLOR_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);		// To operate on the model-view matrix
 		
 	cocktail->draw();
-	glutPostRedisplay();
+
+	glutSwapBuffers();				// Swap front and back buffers (of double buffered mode)
 }

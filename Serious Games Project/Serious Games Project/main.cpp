@@ -16,23 +16,13 @@ LowResTimer timer;
 double oldTime = 0;
 int refreshMillis = 16;
 
-int width = 600;
-int height = 400;
-float posx = 140, posy = 90, size = 30;
-bool mouseActive = false;
-bool clearScreen = true;
-float mouseX, mouseY;
-float lastX, lastY;
-
 void init()
 {
-	game = new Game();
-	game->init();
+	glClearColor(0.0, 0.0, 0.7, 1.0); // Set background (clear) color to black
 }
 
 void draw()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
 	game->draw();
 }
 
@@ -67,14 +57,10 @@ void cleanUp()
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
+	game = new Game();
+	game->init();
 	timer.startTimer();
 	GLUTRenderer();
 	cleanUp();
 	return 0;
 }
-
-//glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-//glutInitWindowSize(800, 600);
-//glutCreateWindow("Serious Games Coursework");
-//glClearColor(0.0, 0.0, 0.0, 0.0);
-//gluOrtho2D(0, 800, 0, 600);

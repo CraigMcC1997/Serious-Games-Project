@@ -52,7 +52,6 @@ void Cocktail::inputOtherIngredients()
 	cout << "SMALLER" << endl;
 }
 
-
 //Create an array of all ingredients by adding the correct and other ingredient arrays together
 void Cocktail::createListOfIngredients()
 {

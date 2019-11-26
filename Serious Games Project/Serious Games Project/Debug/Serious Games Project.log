@@ -1,5 +1,2 @@
 ﻿  Game.cpp
-  main.cpp
-  Generating Code...
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\main.cpp(46,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Serious Games Project.vcxproj -> E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Debug\Serious Games Project.exe
