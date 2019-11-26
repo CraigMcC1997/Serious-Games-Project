@@ -131,18 +131,16 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlaySound.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="WindowMaker.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AbstractWindow.h" />
     <ClInclude Include="bass.h" />
     <ClInclude Include="Cocktail.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="PlaySound.h" />
-    <ClInclude Include="Window.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="..\Resources\Fonts\ABOVE.ttf" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="WindowMaker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

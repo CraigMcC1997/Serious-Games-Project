@@ -4,6 +4,7 @@
 #include "PlaySound.h"
 #include <Windows.h>
 #include <mmsystem.h>
+#include "WindowMaker.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <glm/glm.hpp>
@@ -20,6 +21,7 @@ using namespace glm;
 class Game
 {
 private:
+	WindowMaker* window;
 	Cocktail* cocktail = new Cocktail();
 
 	bool mouseActive = false, leftPressed = false, rightPressed = false;	//used for mouse inputs
@@ -42,6 +44,8 @@ private:
 
 	int x = 200, y = 100;
 
+	POINT mousePos;
+
 	
 
 public:
@@ -51,8 +55,9 @@ public:
 	}
 
 	void init();
-	void update();
+	void update(float dt);
 	void mouseInput();
+	void ReshapeWindow(int weigth, int height);
 	void draw();
 
 	void saveHighScore();

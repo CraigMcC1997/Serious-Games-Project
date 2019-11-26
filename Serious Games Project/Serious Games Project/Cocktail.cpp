@@ -94,7 +94,7 @@ void Cocktail::displayIngredients()
 	int y = glutGet(GLUT_WINDOW_HEIGHT) - 100;
 
 
-	drawString(GLUT_BITMAP_HELVETICA_18, x, y, "Possible Ingredients: ");
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, x, y, "Possible Ingredients: ");
 
 
 	for (int i = 0; i < guessIngredients.size(); i++)
@@ -102,7 +102,8 @@ void Cocktail::displayIngredients()
 		if (y > glutGet(GLUT_WINDOW_HEIGHT) /2)
 		{
 			y -= 30;
-			drawString(GLUT_BITMAP_HELVETICA_18, x, y, count + ". " + guessIngredients[i]);
+			drawString(GLUT_BITMAP_TIMES_ROMAN_24, x, y, count + ". " + guessIngredients[i]);
+			createHitbox(guessIngredients[i], x, y);
 		}
 		else
 		{
@@ -117,7 +118,7 @@ void Cocktail::drawString(void* font, float x, float y, string s)
 {
 	glRasterPos3f(x, y, 0.0);
 	for (char i = 0; i < s.length(); ++i)
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, s[i]);
+		glutBitmapCharacter(font, s[i]);
 }
 
 
@@ -160,6 +161,29 @@ string Cocktail::getName()
 vector<string> Cocktail::getIngredients()
 {
 	return guessIngredients;
+}
+
+void Cocktail::createHitbox(string str, int x, int y)
+{
+	string newString = "___________________________";
+
+	// take x & y as starting points
+	// all hitboxes will be the same height so either + || - a set amount on the y
+	// increment along the string until the end
+	// mark the end point and we have the length of the string
+	// this should leave us with a box around a specified area
+
+	//finding the length of the string on screen
+	int count = str.length() * 12;
+
+	//adding this length onto the start point to find size on x axis
+	int endX = x + count;
+
+	//adding the same height to each bounding box 
+	int endY = y + 20;
+
+	//!!testing starting position works!!
+	drawString(GLUT_BITMAP_HELVETICA_18, endX, endY, newString);
 }
 
 void Cocktail::update()

@@ -2,6 +2,11 @@
 
 void Game::init()
 {
+	int windowWidth = glutGet(GLUT_SCREEN_WIDTH) - 100;
+	int windowHeight = glutGet(GLUT_SCREEN_HEIGHT) - 100;
+
+	window = new WindowMaker("Serious Games Coursework", 800, 600,
+		glutGet(GLUT_SCREEN_WIDTH) / 2 - windowWidth / 2, glutGet(GLUT_SCREEN_HEIGHT) / 2 - windowHeight / 2); //placing the window in the middle of the monitor
 
 	//samples = new HSAMPLE[5];	//array of sound  files
 	//samples[0] = Sound::loadSample("../Resources/SoundFiles/Jump.wav", BASS_SAMPLE_OVER_POS);	//adding sound files to the array to be played later in code
@@ -40,10 +45,26 @@ void Game::readHighscore()
 	else cout << "Unable to open file";
 }
 
-void Game::update()
+
+
+void Game::update(float dt)
 {
-	cout << "test" << endl;
+	POINT mousePos;
+	GetCursorPos(&mousePos);//tracking the mouse position
+
 	cocktail->update();
+
+	//checking if mouse is inside window
+	if (mousePos.x > (window->getXPos()) && mousePos.x < (window->getXPos() + window->getWidth()) &&
+		mousePos.y >(window->getYPos()) && mousePos.y < (window->getYPos() + window->getHeight()))
+	{
+		//get mouse inputs
+		mouseInput();
+
+		cout << "test" << endl;
+	}
+
+	glutPostRedisplay();
 }
 
 
@@ -54,8 +75,9 @@ void Game::mouseInput()
 	if ((GetKeyState(VK_LBUTTON) & 0x80) != 0)
 	{
 		leftPressed = true;
+		cout << "left pressed" << endl;
 		Sound::playSample(samples[0]);
-		cocktail->removeIngredient("Milk");
+		cocktail->removeIngredient("Lime");
 	}
 	else
 		leftPressed = false;
@@ -64,13 +86,17 @@ void Game::mouseInput()
 	if ((GetKeyState(VK_RBUTTON) & 0x80) != 0)
 	{
 		rightPressed = true;
-		//cout << "right pressed" << endl;
+		cout << "right pressed" << endl;
 	}
 	else
 		rightPressed = false;
 }
 
-
+//allows window to be motified during runtime
+void Game::ReshapeWindow(int width, int height)
+{
+	window->Reshape(width, height);
+}
 
 
 void Game::draw()
@@ -80,6 +106,5 @@ void Game::draw()
 	glClear(GL_COLOR_BUFFER_BIT);	
 		
 	cocktail->draw();
-
-	//SDL_GL_SwapWindow(window); // swap buffers
+	glutPostRedisplay();
 }
