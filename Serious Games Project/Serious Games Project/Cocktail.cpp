@@ -88,7 +88,7 @@ void Cocktail::displayCorrectCocktail()
 void Cocktail::displayIngredients()
 {
 	int count = 1;
-	float textX = -1.0f;
+	float textX = -1.3f;
 	float textY = 0.5f;
 	string display;
 
@@ -113,7 +113,7 @@ void Cocktail::displayIngredients()
 	}
 	count = 1;
 
-	textX = -1.0f;
+	textX = -1.3f;
 	textY = -0.7f;
 
 	drawString(GLUT_BITMAP_TIMES_ROMAN_24, textX, textY, "Correct Ingredients: ");
@@ -128,10 +128,10 @@ void Cocktail::displayIngredients()
 			count++;														//Increase count
 			display = "";													//reset string
 
-			if (textY <= -1.0f)												//if text gets below screen
+			if (textY <= -0.9f)												//if text gets below screen
 			{																//move text up and across
 				textY = -0.7f;
-				textX += 0.7f;
+				textX += 0.8f;
 			}
 		}
 	}
@@ -140,7 +140,7 @@ void Cocktail::displayIngredients()
 //Takes a font, position and text and draws this to screen
 void Cocktail::drawString(void* font, float x, float y, string s)
 {
-	glRasterPos3f(x, y, 0.0);
+	glRasterPos2f(x, y);
 	for (char i = 0; i < s.length(); ++i)
 		glutBitmapCharacter(font, s[i]);
 }
@@ -190,14 +190,27 @@ bool Cocktail::checkIngredient(int choice)
 {
 	bool found = false;
 	string ingredient = guessIngredients[choice];
-	if (std::find(correctIngredients.begin(), correctIngredients.end(), ingredient) != correctIngredients.end())
+	if (!correctIngredients.empty())
 	{
-		removeIngredient(ingredient);
-		found = true;
+		if (std::find(correctIngredients.begin(), correctIngredients.end(), ingredient) != correctIngredients.end())
+		{
+			removeIngredient(ingredient);
+			found = true;
+		}
+		else
+			cout << "not found";
 	}
-	else
-		cout << "not found";
 	return found;
+}
+
+void Cocktail::setUp()
+{
+	correctChoices.clear();
+	getCorrectCocktail();
+	createListOfIngredients();
+	removeDuplicates();
+	displayCorrectCocktail();
+	displayIngredients();
 }
 
 //void Cocktail::createHitbox(string str, int x, int y)
@@ -226,14 +239,17 @@ bool Cocktail::checkIngredient(int choice)
 
 void Cocktail::update()
 {
-	//chooseIngredient();
-	//allIngredientsFound();
+	if (correctIngredients.empty())
+	{
+		cout << "DONE" << endl;
+		setUp();
+	}
 }
 
 void Cocktail::draw()
 {
 	if (name.length() > 0)
-		drawString(GLUT_BITMAP_HELVETICA_18, -0.0, 0.9, "Name: " + name);
+		drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.9, "Name: " + name);
 
 	displayIngredients();
 }

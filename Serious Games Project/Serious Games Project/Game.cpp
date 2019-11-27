@@ -209,7 +209,7 @@ void Game::draw()
 	glMatrixMode(GL_MODELVIEW);		// To operate on the model-view matrix
 		
 	cocktail->draw();
-	drawString(GLUT_BITMAP_TIMES_ROMAN_24, 0.9, 0.9, to_string(currentScore));	//draw text
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, 0.9, 0.9, "Score: " + to_string(currentScore));	//draw text
 
 	glutSwapBuffers();				// Swap front and back buffers (of double buffered mode)
 }
