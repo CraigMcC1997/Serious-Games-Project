@@ -67,6 +67,6 @@ public:
 	vector<string> getIngredients();
 	void drawString(void* font, float x, float y, string s);
 	void createHitbox(string, int, int);
-	bool checkIngredient(string ingredient);
+	bool checkIngredient(int choice);
 };
 

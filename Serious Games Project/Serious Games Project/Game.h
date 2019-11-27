@@ -46,6 +46,8 @@ private:
 
 	POINT mousePos;
 
+	int numChoice = 0;
+
 public:
 	Game game() 
 	{

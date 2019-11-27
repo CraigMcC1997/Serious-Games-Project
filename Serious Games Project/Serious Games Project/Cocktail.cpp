@@ -186,9 +186,10 @@ vector<string> Cocktail::getIngredients()
 	return guessIngredients;
 }
 
-bool Cocktail::checkIngredient(string ingredient)
+bool Cocktail::checkIngredient(int choice)
 {
 	bool found = false;
+	string ingredient = guessIngredients[choice];
 	if (std::find(correctIngredients.begin(), correctIngredients.end(), ingredient) != correctIngredients.end())
 	{
 		removeIngredient(ingredient);

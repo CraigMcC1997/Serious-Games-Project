@@ -108,17 +108,86 @@ void Game::keyboard(unsigned char key, int x, int y)
 	switch (key) 
 	{
 	case '1':
-		if (cocktail->checkIngredient("Lime"))
+	{
+		numChoice = 0;
+		if (cocktail->checkIngredient(numChoice))
 		{
 			currentScore++;
 		}
-		break;
+	}
+	break;
 	case '2':
-		if (cocktail->checkIngredient("Mango"))
+	{
+		numChoice = 1;
+		if (cocktail->checkIngredient(numChoice))
 		{
 			currentScore++;
 		}
-		break;
+	}
+	break;
+	case '3':
+	{
+		numChoice = 2;
+		if (cocktail->checkIngredient(numChoice))
+		{
+			currentScore++;
+		}
+	}
+	break;
+	case '4':
+	{
+		numChoice = 3;
+		if (cocktail->checkIngredient(numChoice))
+		{
+			currentScore++;
+		}
+	}
+	break;
+	case '5':
+	{
+		numChoice = 4;
+		if (cocktail->checkIngredient(numChoice))
+		{
+			currentScore++;
+		}
+	}
+	break;
+	case '6':
+	{
+		numChoice = 5;
+		if (cocktail->checkIngredient(numChoice))
+		{
+			currentScore++;
+		}
+	}
+	break;
+	case '7':
+	{
+		numChoice = 6;
+		if (cocktail->checkIngredient(numChoice))
+		{
+			currentScore++;
+		}
+	}
+	break;
+	case '8':
+	{
+		numChoice = 7;
+		if (cocktail->checkIngredient(numChoice))
+		{
+			currentScore++;
+		}
+	}
+	break;
+	case '9':
+	{
+		numChoice = 8;
+		if (cocktail->checkIngredient(numChoice))
+		{
+			currentScore++;
+		}
+	}
+	break;
 	case 's':
 		saveHighScore();
 		break;
