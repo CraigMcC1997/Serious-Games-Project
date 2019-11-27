@@ -57,6 +57,8 @@ public:
 	void init();
 	void update(float dt);
 	void mouseInput();
+	void keyboardInput();
+	void keyboard(unsigned char key, int x, int y);
 	void ReshapeWindow(int weigth, int height);
 	void draw();
 

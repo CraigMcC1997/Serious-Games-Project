@@ -95,6 +95,20 @@ void Game::mouseInput()
 		rightPressed = false;
 }
 
+void Game::keyboard(unsigned char key, int x, int y)
+{
+	switch (key) {
+	case 'a':
+		cout << "a" << endl;
+		break;
+	case 'b':
+		cout << "b" << endl;
+		break;
+	default:
+		break;
+	}
+}
+
 //allows window to be motified during runtime
 void Game::ReshapeWindow(int width, int height)
 {

@@ -16,6 +16,10 @@ LowResTimer timer;
 double oldTime = 0;
 int refreshMillis = 16;
 
+unsigned char key;
+int x;
+int y;
+
 void init()
 {
 	glClearColor(0.0, 0.0, 0.0, 1.0); // Set background (clear) color to black
@@ -29,6 +33,11 @@ void draw()
 void reshape(GLsizei width, GLsizei height)
 {
 	game->ReshapeWindow(width, height);
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+	game->keyboard(key, x, y);
 }
 
 void update(int value)
@@ -45,6 +54,7 @@ void GLUTRenderer()
 	glutReshapeFunc(reshape);
 	glutTimerFunc(0, update, 0);
 	init();
+	glutKeyboardFunc(keyboard);
 	glutMainLoop();
 }
 

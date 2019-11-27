@@ -99,12 +99,8 @@ void Cocktail::displayIngredients()
 		if (textY >= -1.0f)
 		{
 			textY -= 0.2f;
-			cout << textX << endl;
-			cout << textY << endl;
 			drawString(GLUT_BITMAP_TIMES_ROMAN_24, textX, textY, count + ". " + guessIngredients[i]);
-			
-			
-			createHitbox(guessIngredients[i], textX, textY);
+			//createHitbox(guessIngredients[i], textX, textY);
 		}
 		if (textY <= -1.0f)
 		{
@@ -164,28 +160,29 @@ vector<string> Cocktail::getIngredients()
 	return guessIngredients;
 }
 
-void Cocktail::createHitbox(string str, int x, int y)
-{
-	string newString = "___________________________";
-
-	// take x & y as starting points
-	// all hitboxes will be the same height so either + || - a set amount on the y
-	// increment along the string until the end
-	// mark the end point and we have the length of the string
-	// this should leave us with a box around a specified area
-
-	//finding the length of the string on screen
-	int count = str.length() * 12;
-
-	//adding this length onto the start point to find size on x axis
-	int endX = x + count;
-
-	//adding the same height to each bounding box 
-	int endY = y + 20;
-
-	//!!testing starting position works!!
-	drawString(GLUT_BITMAP_HELVETICA_18, endX, endY, newString);
-}
+//void Cocktail::createHitbox(string str, int x, int y)
+//{
+//	string newString = "___________________________";
+//
+//	// take x & y as starting points
+//	// all hitboxes will be the same height so either + || - a set amount on the y
+//	// increment along the string until the end
+//	// mark the end point and we have the length of the string
+//	// this should leave us with a box around a specified area
+//
+//	//finding the length of the string on screen
+//	float length = 1 / str.length();
+//	cout << length << endl;
+//
+//	//adding this length onto the start point to find size on x axis
+//	int endX = x + length;
+//
+//	//adding the same height to each bounding box 
+//	int endY = y + 0.2;
+//
+//	//!!testing starting position works!!
+//	drawString(GLUT_BITMAP_HELVETICA_18, endX, endY, newString);
+//}
 
 void Cocktail::update()
 {
