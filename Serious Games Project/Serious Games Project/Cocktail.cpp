@@ -89,25 +89,27 @@ void Cocktail::displayCorrectCocktail()
 void Cocktail::displayIngredients()
 {
 	int count = 1;
-	int x = 0;
-	int y = glutGet(GLUT_WINDOW_HEIGHT) - 100;
+	float textX = -1.0f;
+	float textY = 0.5f;
 
-
-	drawString(GLUT_BITMAP_TIMES_ROMAN_24, x, y, "Possible Ingredients: ");
-
-
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, textX, textY, "Possible Ingredients: ");
+	
 	for (int i = 0; i < guessIngredients.size(); i++)
 	{
-		if (y > glutGet(GLUT_WINDOW_HEIGHT) /2)
+		if (textY >= -1.0f)
 		{
-			y -= 30;
-			drawString(GLUT_BITMAP_TIMES_ROMAN_24, x, y, count + ". " + guessIngredients[i]);
-			createHitbox(guessIngredients[i], x, y);
+			textY -= 0.2f;
+			cout << textX << endl;
+			cout << textY << endl;
+			drawString(GLUT_BITMAP_TIMES_ROMAN_24, textX, textY, count + ". " + guessIngredients[i]);
+			
+			
+			createHitbox(guessIngredients[i], textX, textY);
 		}
-		else
+		if (textY <= -1.0f)
 		{
-			y = glutGet(GLUT_WINDOW_HEIGHT) - 100;
-			x += 300;
+			textY = 0.5f;
+			textX += 0.7f;
 		}
 	}
 }
@@ -194,7 +196,7 @@ void Cocktail::update()
 void Cocktail::draw()
 {
 	if (name.length() > 0)
-		drawString(GLUT_BITMAP_HELVETICA_18, 0, glutGet(GLUT_WINDOW_HEIGHT) - 30, "Name: " + name);
+		drawString(GLUT_BITMAP_HELVETICA_18, -0.2 , 0.9, "Name: " + name);
 
 	displayIngredients();
 }

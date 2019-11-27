@@ -28,6 +28,8 @@ private:
 	int numberOfOtherIngredients = sizeof(otherIngredients) / sizeof(otherIngredients[0]);	//actual size of array
 	int numberOfGuessingIngredients = numberOfCorrectIngredients + numberOfOtherIngredients;
 
+
+
 	string const cocktails[MAX_SIZE] =
 	{
 		"Zombie",

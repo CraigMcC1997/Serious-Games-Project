@@ -6,9 +6,9 @@
 #include <iostream>
 #include "Game.h"
 
-//#if _DEBUG
-//#pragma comment(linker, "/subsystem:\"console\" /entry:\"WinMainCRTStartup\"")
-//#endif
+#if _DEBUG
+#pragma comment(linker, "/subsystem:\"console\" /entry:\"WinMainCRTStartup\"")
+#endif
 
 
 Game* game;

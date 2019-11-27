@@ -38,7 +38,7 @@ private:
 	GLuint textures[5];
 
 	//Used by BASS library
-	HSAMPLE* samples = NULL;
+	HSAMPLE* samples = new HSAMPLE[5];
 
 	bool allowPlay = true;
 
