@@ -97,11 +97,12 @@ void Game::mouseInput()
 
 void Game::keyboard(unsigned char key, int x, int y)
 {
+
 	switch (key) {
-	case 'a':
+	case '1':
 		cout << "a" << endl;
 		break;
-	case 'b':
+	case '2':
 		cout << "b" << endl;
 		break;
 	default:
@@ -113,6 +114,11 @@ void Game::keyboard(unsigned char key, int x, int y)
 void Game::ReshapeWindow(int width, int height)
 {
 	window->Reshape(width, height);
+}
+
+void Game::checkIngredient()
+{
+
 }
 
 void Game::draw()

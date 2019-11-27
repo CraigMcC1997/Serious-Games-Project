@@ -73,6 +73,7 @@ void Cocktail::removeDuplicates()
 	guessIngredients.resize(std::distance(guessIngredients.begin(), temp));	//resizing to remove duplicates memory
 }
 
+//FOR TESTING PURPOSES ONLY!!!
 void Cocktail::displayCorrectCocktail()
 {
 	int count = 1;
@@ -91,22 +92,28 @@ void Cocktail::displayIngredients()
 	int count = 1;
 	float textX = -1.0f;
 	float textY = 0.5f;
+	string display;
 
 	drawString(GLUT_BITMAP_TIMES_ROMAN_24, textX, textY, "Possible Ingredients: ");
 	
 	for (int i = 0; i < guessIngredients.size(); i++)
 	{
+		
 		if (textY >= -1.0f)
 		{
-			textY -= 0.2f;
-			drawString(GLUT_BITMAP_TIMES_ROMAN_24, textX, textY, count + ". " + guessIngredients[i]);
+			display += to_string(count) += ". " + guessIngredients[i];
+			textY -= 0.1f;
+			drawString(GLUT_BITMAP_TIMES_ROMAN_24, textX, textY, display);
 			//createHitbox(guessIngredients[i], textX, textY);
+			count++;
+			display = "";
 		}
 		if (textY <= -1.0f)
 		{
 			textY = 0.5f;
 			textX += 0.7f;
 		}
+		
 	}
 }
 
