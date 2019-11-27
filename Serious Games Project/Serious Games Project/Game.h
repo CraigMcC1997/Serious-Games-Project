@@ -46,8 +46,6 @@ private:
 
 	POINT mousePos;
 
-	
-
 public:
 	Game game() 
 	{
@@ -59,8 +57,9 @@ public:
 	void mouseInput();
 	void keyboard(unsigned char key, int x, int y);
 	void ReshapeWindow(int weigth, int height);
-	void checkIngredient();
+	
 	void draw();
+	void drawString(void* font, float x, float y, string s);
 
 	void saveHighScore();
 	void readHighscore();

@@ -2,7 +2,7 @@
 
 void Cocktail::init()
 {
-	findCorrectCocktail();
+	getCorrectCocktail();
 	createListOfIngredients();
 	removeDuplicates();
 	displayCorrectCocktail();
@@ -10,7 +10,7 @@ void Cocktail::init()
 }
 
 //Find a random cocktail from the array of cocktails and save its ingredients and name
-void Cocktail::findCorrectCocktail()
+void Cocktail::getCorrectCocktail()
 {
 	srand(time(NULL));					// seed RNG
 	int option = (rand() % MAX_SIZE);	// find random number 
@@ -31,6 +31,7 @@ void Cocktail::findCorrectCocktail()
 }
 
 //input all the ingredients from the saved file of random ingredients
+//shuffle the ingredients and shrink to only hold 10
 void Cocktail::inputOtherIngredients()
 {
 	//opeing file and storing details as variables WRONG INGREDIENTS
@@ -48,8 +49,6 @@ void Cocktail::inputOtherIngredients()
 
 	random_shuffle(otherIngredients.begin(), otherIngredients.end());
 	otherIngredients.resize(10);
-
-	cout << "SMALLER" << endl;
 }
 
 //Create an array of all ingredients by adding the correct and other ingredient arrays together
@@ -59,8 +58,6 @@ void Cocktail::createListOfIngredients()
 
 	guessIngredients.insert(guessIngredients.end(), correctIngredients.begin(), correctIngredients.end());
 	guessIngredients.insert(guessIngredients.end(), otherIngredients.begin(), otherIngredients.end());
-
-	random_shuffle(guessIngredients.begin(), guessIngredients.end());
 }
 
 
@@ -68,9 +65,10 @@ void Cocktail::createListOfIngredients()
 void Cocktail::removeDuplicates()
 {
 	vector<string>::iterator temp;
-	sort(guessIngredients.begin(), guessIngredients.end());	//sorting the array in order
+	sort(guessIngredients.begin(), guessIngredients.end());	//sorting the container in order
 	temp = unique(guessIngredients.begin(), guessIngredients.end());	//removing duplicates
 	guessIngredients.resize(std::distance(guessIngredients.begin(), temp));	//resizing to remove duplicates memory
+	random_shuffle(guessIngredients.begin(), guessIngredients.end());	//unsorting order
 }
 
 //FOR TESTING PURPOSES ONLY!!!
@@ -98,22 +96,44 @@ void Cocktail::displayIngredients()
 	
 	for (int i = 0; i < guessIngredients.size(); i++)
 	{
-		
-		if (textY >= -1.0f)
+		if (textY >= -0.2f)
 		{
-			display += to_string(count) += ". " + guessIngredients[i];
-			textY -= 0.1f;
-			drawString(GLUT_BITMAP_TIMES_ROMAN_24, textX, textY, display);
+			display += to_string(count) += ". " + guessIngredients[i];		//what text will be displayed
+			textY -= 0.1f;													//moving text down
+			drawString(GLUT_BITMAP_TIMES_ROMAN_24, textX, textY, display);	//draw text
 			//createHitbox(guessIngredients[i], textX, textY);
-			count++;
-			display = "";
+			count++;														//Increase count
+			display = "";													//reset string
 		}
-		if (textY <= -1.0f)
-		{
+		if (textY <= -0.2f)												//if text gets below screen
+		{																//move text up and across
 			textY = 0.5f;
-			textX += 0.7f;
+			textX += 0.8f;
 		}
-		
+	}
+	count = 1;
+
+	textX = -1.0f;
+	textY = -0.7f;
+
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, textX, textY, "Correct Ingredients: ");
+
+	if (correctChoices.size() != 0) {
+		for (int i = 0; i < correctChoices.size(); i++)
+		{
+			display += to_string(count) += ". " + correctChoices[i];		//what text will be displayed
+			textY -= 0.1f;													//moving text down
+			drawString(GLUT_BITMAP_TIMES_ROMAN_24, textX, textY, display);	//draw text
+			//createHitbox(guessIngredients[i], textX, textY);
+			count++;														//Increase count
+			display = "";													//reset string
+
+			if (textY <= -1.0f)												//if text gets below screen
+			{																//move text up and across
+				textY = 0.5f;
+				textX += 0.7f;
+			}
+		}
 	}
 }
 
@@ -147,14 +167,13 @@ void Cocktail::removeIngredient(string choice)
 {
 	std::vector<string>::iterator temp;
 
-	if (std::find(correctIngredients.begin(), correctIngredients.end(), choice) != correctIngredients.end()) 
-	{
-		//remove ingredient from containers 
-		temp = correctIngredients.erase(std::remove(correctIngredients.begin(), correctIngredients.end(), choice));
-		temp = guessIngredients.erase(std::remove(guessIngredients.begin(), guessIngredients.end(), choice));
-		//resize
-		guessIngredients.resize(std::distance(guessIngredients.begin(), temp));	//resizing to remove duplicates memory
-	}
+	//remove ingredient from containers 
+	temp = correctIngredients.erase(std::remove(correctIngredients.begin(), correctIngredients.end(), choice));
+	temp = guessIngredients.erase(std::remove(guessIngredients.begin(), guessIngredients.end(), choice));
+	guessIngredients.resize(std::distance(guessIngredients.begin(), temp));	//resizing to remove duplicates memory
+	displayCorrectCocktail();
+
+	correctChoices.push_back(choice);
 }
 
 string Cocktail::getName()
@@ -165,6 +184,19 @@ string Cocktail::getName()
 vector<string> Cocktail::getIngredients()
 {
 	return guessIngredients;
+}
+
+bool Cocktail::checkIngredient(string ingredient)
+{
+	bool found = false;
+	if (std::find(correctIngredients.begin(), correctIngredients.end(), ingredient) != correctIngredients.end())
+	{
+		removeIngredient(ingredient);
+		found = true;
+	}
+	else
+		cout << "not found";
+	return found;
 }
 
 //void Cocktail::createHitbox(string str, int x, int y)

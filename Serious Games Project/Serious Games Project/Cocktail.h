@@ -28,7 +28,7 @@ private:
 	int numberOfOtherIngredients = sizeof(otherIngredients) / sizeof(otherIngredients[0]);	//actual size of array
 	int numberOfGuessingIngredients = numberOfCorrectIngredients + numberOfOtherIngredients;
 
-
+	
 
 	string const cocktails[MAX_SIZE] =
 	{
@@ -46,23 +46,27 @@ private:
 	vector<string> otherIngredients;
 	vector<string> correctIngredients;
 	vector<string> guessIngredients;
+	vector<string> correctChoices;
+
+	void removeIngredient(string choice);
 
 public:
 	void init();
 	void update();
 	void draw();
 
-	void findCorrectCocktail();
+	void getCorrectCocktail();
 	void inputOtherIngredients();
 	void createListOfIngredients();
 	void removeDuplicates();
 	void displayCorrectCocktail();
 	void displayIngredients();
 	bool allIngredientsFound();
-	void removeIngredient(string choice);
+
 	string getName();
 	vector<string> getIngredients();
 	void drawString(void* font, float x, float y, string s);
 	void createHitbox(string, int, int);
+	bool checkIngredient(string ingredient);
 };
 

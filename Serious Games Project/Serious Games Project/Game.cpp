@@ -17,6 +17,14 @@ void Game::init()
 	cout << "Chose which ingredients are in the cocktail displayed" << endl;
 }
 
+//Takes a font, position and text and draws this to screen
+void Game::drawString(void* font, float x, float y, string s)
+{
+	glRasterPos3f(x, y, 0.0);
+	for (char i = 0; i < s.length(); ++i)
+		glutBitmapCharacter(font, s[i]);
+}
+
 void Game::saveHighScore()
 {
 	readHighscore();	//read in & save the current HighScore
@@ -62,7 +70,6 @@ void Game::update(float dt)
 	}
 }
 
-
 //get mouse inputs
 void Game::mouseInput()
 {
@@ -74,7 +81,7 @@ void Game::mouseInput()
 			leftPressed = true;
 			cout << "left pressed" << endl;
 			Sound::playSample(samples[0]);
-			cocktail->removeIngredient("Lime");
+			//cocktail->checkIngredient("Lime");
 		}
 	}
 	else
@@ -88,7 +95,7 @@ void Game::mouseInput()
 			rightPressed = true;
 			cout << "right pressed" << endl;
 			Sound::playSample(samples[1]);
-			cocktail->removeIngredient("Lime");
+			//cocktail->checkIngredient("Lime");
 		}
 	}
 	else
@@ -97,13 +104,19 @@ void Game::mouseInput()
 
 void Game::keyboard(unsigned char key, int x, int y)
 {
-
-	switch (key) {
+	switch (key) 
+	{
 	case '1':
-		cout << "a" << endl;
+		if (cocktail->checkIngredient("Lime"))
+		{
+			currentScore++;
+		}
 		break;
 	case '2':
-		cout << "b" << endl;
+		if (cocktail->checkIngredient("Mango"))
+		{
+			currentScore++;
+		}
 		break;
 	default:
 		break;
@@ -116,18 +129,14 @@ void Game::ReshapeWindow(int width, int height)
 	window->Reshape(width, height);
 }
 
-void Game::checkIngredient()
-{
-
-}
-
 void Game::draw()
 {
 	// clear the screen
-	//glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);		// To operate on the model-view matrix
 		
 	cocktail->draw();
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, 0.9, 0.9, to_string(currentScore));	//draw text
 
 	glutSwapBuffers();				// Swap front and back buffers (of double buffered mode)
 }
