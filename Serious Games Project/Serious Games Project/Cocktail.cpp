@@ -130,7 +130,7 @@ void Cocktail::displayIngredients()
 
 			if (textY <= -1.0f)												//if text gets below screen
 			{																//move text up and across
-				textY = 0.5f;
+				textY = -0.7f;
 				textX += 0.7f;
 			}
 		}
@@ -233,7 +233,7 @@ void Cocktail::update()
 void Cocktail::draw()
 {
 	if (name.length() > 0)
-		drawString(GLUT_BITMAP_HELVETICA_18, -0.2 , 0.9, "Name: " + name);
+		drawString(GLUT_BITMAP_HELVETICA_18, -0.0, 0.9, "Name: " + name);
 
 	displayIngredients();
 }
