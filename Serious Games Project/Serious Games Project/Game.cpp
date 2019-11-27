@@ -30,15 +30,16 @@ void Game::saveHighScore()
 	readHighscore();	//read in & save the current HighScore
 
 	if (currentScore > highScore)	//check that the current score isnt bigger than the saved score
+	{
 		highScore = currentScore;	//if so, update the highscore
-
-	outFile.open("../Resources/Highscore.txt");
-	
-	if(outFile.is_open())
-		outFile << highScore;
-	else cout << "Unable to open file";
-
-	outFile.close();
+		
+		outFile.open("../Resources/Highscore.txt");
+		if (outFile.is_open())
+			outFile << highScore;
+		else cout << "Unable to open file";
+		outFile.close();
+	}
+	cout << "saved" << endl;
 }
 
 void Game::readHighscore()
@@ -117,6 +118,9 @@ void Game::keyboard(unsigned char key, int x, int y)
 		{
 			currentScore++;
 		}
+		break;
+	case 's':
+		saveHighScore();
 		break;
 	default:
 		break;

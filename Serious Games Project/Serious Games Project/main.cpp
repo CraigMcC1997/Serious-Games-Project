@@ -71,6 +71,7 @@ int main(int argc, char** argv)
 	game->init();
 	timer.startTimer();
 	GLUTRenderer();
+	game->saveHighScore();
 	cleanUp();
 	return 0;
 }
