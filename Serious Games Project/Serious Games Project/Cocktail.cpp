@@ -190,6 +190,7 @@ bool Cocktail::checkIngredient(int choice)
 {
 	bool found = false;
 	string ingredient = guessIngredients[choice];
+	cout << guessIngredients[choice] << endl;
 	if (!correctIngredients.empty())
 	{
 		if (std::find(correctIngredients.begin(), correctIngredients.end(), ingredient) != correctIngredients.end())
@@ -217,30 +218,6 @@ int Cocktail::getCocktailsComplete()
 {
 	return cocktailsComplete;
 }
-
-//void Cocktail::createHitbox(string str, int x, int y)
-//{
-//	string newString = "___________________________";
-//
-//	// take x & y as starting points
-//	// all hitboxes will be the same height so either + || - a set amount on the y
-//	// increment along the string until the end
-//	// mark the end point and we have the length of the string
-//	// this should leave us with a box around a specified area
-//
-//	//finding the length of the string on screen
-//	float length = 1 / str.length();
-//	cout << length << endl;
-//
-//	//adding this length onto the start point to find size on x axis
-//	int endX = x + length;
-//
-//	//adding the same height to each bounding box 
-//	int endY = y + 0.2;
-//
-//	//!!testing starting position works!!
-//	drawString(GLUT_BITMAP_HELVETICA_18, endX, endY, newString);
-//}
 
 void Cocktail::update()
 {

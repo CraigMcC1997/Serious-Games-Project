@@ -3,5 +3,8 @@ E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games P
 E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Cocktail.cpp(97,20): warning C4018: '<': signed/unsigned mismatch
 E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Cocktail.cpp(122,21): warning C4018: '<': signed/unsigned mismatch
 E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Cocktail.cpp(144,21): warning C4018: '<': signed/unsigned mismatch
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Cocktail.cpp(257,68): warning C4305: 'argument': truncation from 'double' to 'float'
+  main.cpp
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Cocktail.cpp(234,68): warning C4305: 'argument': truncation from 'double' to 'float'
+  Generating Code...
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\main.cpp(46,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Serious Games Project.vcxproj -> E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Debug\Serious Games Project.exe

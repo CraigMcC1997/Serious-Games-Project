@@ -74,12 +74,15 @@ void Game::update(float dt)
 	{
 		lives = 0;
 		alive = false;
-		cout << "DEAD" << endl;
 	}
-	if (cocktail->getCocktailsComplete() >= 1)
+	
+	if (cocktail->getCocktailsComplete() >= 3)
 	{
+		alive = false;
 		win = true;
 	}
+
+	
 }
 
 //get mouse inputs
@@ -114,115 +117,139 @@ void Game::mouseInput()
 		rightPressed = false;
 }
 
+void Game::createNumber(int numOne, int numTwo)
+{
+	string temp;
+
+	if (numOne != NULL)
+	{
+		temp = to_string(numOne);
+		cout << temp << endl;
+
+		if (numTwo != NULL)
+		{
+			temp += to_string(numTwo);
+			cout << temp << endl;
+		}
+		
+		stringstream stringToInt(temp);
+		stringToInt >> numChoice;
+
+		first = NULL;
+		second = NULL;
+
+		checkIngredient();
+	}
+	else
+		cout << "both values NULL" << endl;
+}
+
+void Game::checkIngredient()
+{
+	if (cocktail->checkIngredient(numChoice - 1))
+	{
+		currentScore++;
+	}
+	else
+		lives--;
+}
+
 void Game::keyboard(unsigned char key, int x, int y)
 {
-	switch (key) 
+	if (key != 'a')
 	{
-	case '1':
-	{
-		numChoice = 0;
-		if (cocktail->checkIngredient(numChoice))
+		switch (key)
 		{
-			currentScore++;
-		}
-		else
-			lives--;
-	}
-	break;
-	case '2':
-	{
-		numChoice = 1;
-		if (cocktail->checkIngredient(numChoice))
+		case '0':
 		{
-			currentScore++;
+			if (first == NULL)
+				first = 0;
+			else
+				second = 0;
 		}
-		else
-			lives--;
-	}
-	break;
-	case '3':
-	{
-		numChoice = 2;
-		if (cocktail->checkIngredient(numChoice))
-		{
-			currentScore++;
-		}
-		else
-			lives--;
-	}
-	break;
-	case '4':
-	{
-		numChoice = 3;
-		if (cocktail->checkIngredient(numChoice))
-		{
-			currentScore++;
-		}
-		else
-			lives--;
-	}
-	break;
-	case '5':
-	{
-		numChoice = 4;
-		if (cocktail->checkIngredient(numChoice))
-		{
-			currentScore++;
-		}
-		else
-			lives--;
-	}
-	break;
-	case '6':
-	{
-		numChoice = 5;
-		if (cocktail->checkIngredient(numChoice))
-		{
-			currentScore++;
-		}
-		else
-			lives--;
-	}
-	break;
-	case '7':
-	{
-		numChoice = 6;
-		if (cocktail->checkIngredient(numChoice))
-		{
-			currentScore++;
-		}
-		else
-			lives--;
-	}
-	break;
-	case '8':
-	{
-		numChoice = 7;
-		if (cocktail->checkIngredient(numChoice))
-		{
-			currentScore++;
-		}
-		else
-			lives--;
-	}
-	break;
-	case '9':
-	{
-		numChoice = 8;
-		if (cocktail->checkIngredient(numChoice))
-		{
-			currentScore++;
-		}
-		else
-			lives--;
-	}
-	break;
-	case 's':
-		saveHighScore();
 		break;
-	default:
+		case '1':
+		{
+			if (first == NULL)
+				first = 1;
+			else
+				second = 1;
+		}
 		break;
+		case '2':
+		{
+			if (first == NULL)
+				first = 2;
+			else
+				second = 2;
+		}
+		break;
+		case '3':
+		{
+			if (first == NULL)
+				first = 3;
+			else
+				second = 3;
+		}
+		break;
+		case '4':
+		{
+			if (first == NULL)
+				first = 4;
+			else
+				second = 4;
+		}
+		break;
+		case '5':
+		{
+			if (first == NULL)
+				first = 5;
+			else
+				second = 5;
+		}
+		break;
+		case '6':
+		{
+			if (first == NULL)
+				first = 6;
+			else
+				second = 6;
+		}
+		break;
+		case '7':
+		{
+			if (first == NULL)
+				first = 7;
+			else
+				second = 7;
+		}
+		break;
+		case '8':
+		{
+			if (first == NULL)
+				first = 8;
+			else
+				second = 8;
+		}
+		break;
+		case '9':
+		{
+			if (first == NULL)
+				first = 9;
+			else
+				second = 9;
+		}
+		break;
+		case 's':
+			saveHighScore();
+			break;
+		default:
+			cout << "incorrect key" << endl;
+			break;
+		}
 	}
+	else
+		createNumber(first, second);
 }
 
 //allows window to be motified during runtime
@@ -241,7 +268,7 @@ void Game::drawAlive()
 
 void Game::drawDead()
 {
-	drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.9, "Lives: " + to_string(currentScore));	//draw text
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.9, "Lives: " + to_string(lives));	//draw text
 	drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.8f, "Score: " + to_string(currentScore));	//draw text
 	drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.7f, "Press 's' to save score");	//draw text
 }
@@ -259,20 +286,17 @@ void Game::draw()
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);		// To operate on the model-view matrix
 		
-	if (alive)
+	if (alive)	//game running
 	{
 		drawAlive();
 	}
-	else if(!win)
+	else 
 	{
-		drawDead();
+		if (!win)	
+			drawDead();	//lost
+		else
+			drawWin();	//won
 	}
-	else
-	{
-		drawWin();
-	}
-		
-
 
 	glutSwapBuffers();				// Swap front and back buffers (of double buffered mode)
 }

@@ -12,6 +12,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <stack>
 #include "Cocktail.h"
+#include <sstream>
 
 using namespace std;
 using namespace glm;
@@ -49,6 +50,9 @@ private:
 
 	int numChoice = 0;
 
+	int first = NULL;
+	int second = NULL;
+
 public:
 	Game game() 
 	{
@@ -58,7 +62,6 @@ public:
 	void init();
 	void update(float dt);
 	void mouseInput();
-	void keyboard(unsigned char key, int x, int y);
 	void ReshapeWindow(int weigth, int height);
 	
 	void draw();
@@ -69,4 +72,9 @@ public:
 
 	void saveHighScore();
 	void readHighscore();
+
+	void checkIngredient();
+	void createNumber(int first, int second);
+
+	void keyboard(unsigned char key, int x, int y);
 };

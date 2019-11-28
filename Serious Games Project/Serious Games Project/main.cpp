@@ -40,6 +40,7 @@ void keyboard(unsigned char key, int x, int y)
 	game->keyboard(key, x, y);
 }
 
+
 void update(int value)
 {
 	game->update(timer.getTime() - oldTime);
