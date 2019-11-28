@@ -213,6 +213,11 @@ void Cocktail::setUp()
 	displayIngredients();
 }
 
+int Cocktail::getCocktailsComplete()
+{
+	return cocktailsComplete;
+}
+
 //void Cocktail::createHitbox(string str, int x, int y)
 //{
 //	string newString = "___________________________";
@@ -241,7 +246,7 @@ void Cocktail::update()
 {
 	if (correctIngredients.empty())
 	{
-		cout << "DONE" << endl;
+		cocktailsComplete++;
 		setUp();
 	}
 }

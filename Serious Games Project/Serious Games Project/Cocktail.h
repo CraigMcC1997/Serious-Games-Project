@@ -20,6 +20,7 @@ private:
 	ifstream infile;	//file which holds cocktail ingredients
 	ofstream outFile;
 	string ingredient;
+	int cocktailsComplete = 0;
 
 	bool foundAll = false;
 
@@ -68,6 +69,7 @@ public:
 	void drawString(void* font, float x, float y, string s);
 	void createHitbox(string, int, int);
 	bool checkIngredient(int choice);
+	int getCocktailsComplete();
 
 	void setUp();
 };

@@ -69,6 +69,17 @@ void Game::update(float dt)
 		//get mouse inputs
 		mouseInput();
 	}
+	
+	if (lives <= 0)
+	{
+		lives = 0;
+		alive = false;
+		cout << "DEAD" << endl;
+	}
+	if (cocktail->getCocktailsComplete() >= 1)
+	{
+		win = true;
+	}
 }
 
 //get mouse inputs
@@ -114,6 +125,8 @@ void Game::keyboard(unsigned char key, int x, int y)
 		{
 			currentScore++;
 		}
+		else
+			lives--;
 	}
 	break;
 	case '2':
@@ -123,6 +136,8 @@ void Game::keyboard(unsigned char key, int x, int y)
 		{
 			currentScore++;
 		}
+		else
+			lives--;
 	}
 	break;
 	case '3':
@@ -132,6 +147,8 @@ void Game::keyboard(unsigned char key, int x, int y)
 		{
 			currentScore++;
 		}
+		else
+			lives--;
 	}
 	break;
 	case '4':
@@ -141,6 +158,8 @@ void Game::keyboard(unsigned char key, int x, int y)
 		{
 			currentScore++;
 		}
+		else
+			lives--;
 	}
 	break;
 	case '5':
@@ -150,6 +169,8 @@ void Game::keyboard(unsigned char key, int x, int y)
 		{
 			currentScore++;
 		}
+		else
+			lives--;
 	}
 	break;
 	case '6':
@@ -159,6 +180,8 @@ void Game::keyboard(unsigned char key, int x, int y)
 		{
 			currentScore++;
 		}
+		else
+			lives--;
 	}
 	break;
 	case '7':
@@ -168,6 +191,8 @@ void Game::keyboard(unsigned char key, int x, int y)
 		{
 			currentScore++;
 		}
+		else
+			lives--;
 	}
 	break;
 	case '8':
@@ -177,6 +202,8 @@ void Game::keyboard(unsigned char key, int x, int y)
 		{
 			currentScore++;
 		}
+		else
+			lives--;
 	}
 	break;
 	case '9':
@@ -186,6 +213,8 @@ void Game::keyboard(unsigned char key, int x, int y)
 		{
 			currentScore++;
 		}
+		else
+			lives--;
 	}
 	break;
 	case 's':
@@ -202,14 +231,48 @@ void Game::ReshapeWindow(int width, int height)
 	window->Reshape(width, height);
 }
 
+void Game::drawAlive()
+{
+	cocktail->draw();
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, 0.9, 0.9, "Lives: " + to_string(lives));	//draw text
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, 0.9, 0.8, "Score: " + to_string(currentScore));	//draw text
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, 0.9, 0.7, "Complete: " + to_string(cocktail->getCocktailsComplete()));	//draw text
+}
+
+void Game::drawDead()
+{
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.9, "Lives: " + to_string(currentScore));	//draw text
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.8f, "Score: " + to_string(currentScore));	//draw text
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.7f, "Press 's' to save score");	//draw text
+}
+
+void Game::drawWin()
+{
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.9, "Well done! you got " 
+		+ to_string(cocktail->getCocktailsComplete()) + " cocktails correct in a row!" 
+		+ "YOU WIN!");	//draw text
+}
+
 void Game::draw()
 {
 	// clear the screen
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);		// To operate on the model-view matrix
 		
-	cocktail->draw();
-	drawString(GLUT_BITMAP_TIMES_ROMAN_24, 0.9, 0.9, "Score: " + to_string(currentScore));	//draw text
+	if (alive)
+	{
+		drawAlive();
+	}
+	else if(!win)
+	{
+		drawDead();
+	}
+	else
+	{
+		drawWin();
+	}
+		
+
 
 	glutSwapBuffers();				// Swap front and back buffers (of double buffered mode)
 }

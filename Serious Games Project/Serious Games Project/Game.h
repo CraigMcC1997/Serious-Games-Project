@@ -24,6 +24,9 @@ private:
 
 	bool mouseActive = false, leftPressed = false, rightPressed = false;	//used for mouse inputs
 	int highScore, currentScore;
+	int lives = 3;
+	bool alive = true; bool win = false;
+	
 	
 	ifstream infile;	//file which holds cocktail ingredients
 	ofstream outFile;
@@ -60,6 +63,9 @@ public:
 	
 	void draw();
 	void drawString(void* font, float x, float y, string s);
+	void drawAlive();
+	void drawDead();
+	void drawWin();
 
 	void saveHighScore();
 	void readHighscore();
