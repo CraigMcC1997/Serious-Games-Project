@@ -1,16 +1,5 @@
-﻿  Game.cpp
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(23,21): warning C4018: '<': signed/unsigned mismatch
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(53,20): warning C4018: '<': signed/unsigned mismatch
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(78,21): warning C4018: '<': signed/unsigned mismatch
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(190,15): warning C4018: '<=': signed/unsigned mismatch
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(331,79): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(332,110): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(333,105): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(338,80): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(339,112): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(340,78): warning C4305: 'argument': truncation from 'double' to 'float'
-  main.cpp
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(347,15): warning C4305: 'argument': truncation from 'double' to 'float'
-  Generating Code...
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\main.cpp(46,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+﻿  Cocktail.cpp
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Cocktail.cpp(13,21): warning C4018: '<': signed/unsigned mismatch
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Cocktail.cpp(20,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Cocktail.cpp(91,68): warning C4305: 'argument': truncation from 'double' to 'float'
   Serious Games Project.vcxproj -> E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Debug\Serious Games Project.exe

@@ -35,6 +35,8 @@ void Cocktail::getCorrectCocktail()
 	else cout << "Unable to open file";
 
 	cout << "found a cocktail";
+
+	RemovePossibleCocktail(name);
 }
 
 //FOR TESTING PURPOSES ONLY!!!
@@ -58,16 +60,19 @@ void Cocktail::updateCocktailContainer(vector<string> newContainer)
 
 void Cocktail::RemovePossibleCocktail(string cocktail)
 {
-	//vector<string>::iterator temp;
+	vector<string>::iterator temp;
 
-	////remove ingredient from containers 
-	//temp = cocktails.erase(remove(cocktails.begin(),
-	//	cocktails.end(), cocktail));
-	//cocktails.resize(distance(guessIngredients.begin(), temp));	//resizing to remove duplicates memory
+	//remove ingredient from containers 
+	temp = cocktails.erase(remove(cocktails.begin(),
+		cocktails.end(), cocktail));
+	cocktails.resize(distance(cocktails.begin(), temp));	//resizing to remove duplicates memory
 
-	//cocktail->updateCocktailContainer(cocktailIngredients);
-
-	//cocktail->displayCorrectCocktail();
+	int count = 1;
+	for (vector<string>::const_iterator i = cocktails.begin(); i != cocktails.end(); i++)
+	{
+		cout << count << ". " << *i << endl;
+		count++;
+	}
 }
 
 string Cocktail::getName()
