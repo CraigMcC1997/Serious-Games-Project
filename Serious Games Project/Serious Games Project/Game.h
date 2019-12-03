@@ -10,8 +10,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <stack>
-#include "Cocktail.h"
+#include "HighScore.h"
+#include "GuessingIngredients.h"
 #include <sstream>
 
 using namespace std;
@@ -20,17 +20,18 @@ using namespace glm;
 class Game
 {
 private:
+	int windowWidth = glutGet(GLUT_SCREEN_WIDTH) - 100;
+	int windowHeight = glutGet(GLUT_SCREEN_HEIGHT) - 100;
 	WindowMaker* window;
-	Cocktail* cocktail = new Cocktail();
+	GuessingIngredients* ingredients = new GuessingIngredients();
+	HighScore* score = new HighScore();
+
+	bool foundAll = false;
 
 	bool mouseActive = false, leftPressed = false, rightPressed = false;	//used for mouse inputs
-	int highScore, currentScore;
+	
 	int lives = 3;
 	bool alive = true; bool win = false;
-	
-	
-	ifstream infile;	//file which holds cocktail ingredients
-	ofstream outFile;
 
 	//used for labels
 	TTF_Font* textFont;
@@ -46,12 +47,10 @@ private:
 
 	int x = 200, y = 100;
 
-	POINT mousePos;
-
-	int numChoice = 0;
-
 	int first = NULL;
 	int second = NULL;
+
+	vector<string> correctChoices;
 
 public:
 	Game game() 
@@ -61,20 +60,23 @@ public:
 
 	void init();
 	void update(float dt);
+	void draw();
+	void setUp();
 	void mouseInput();
 	void ReshapeWindow(int weigth, int height);
 	
-	void draw();
+	
 	void drawString(void* font, float x, float y, string s);
 	void drawAlive();
 	void drawDead();
 	void drawWin();
+	void displayIngredients();
+	
+	bool allIngredientsFound();
+	void checkIngredient(int choice);
 
-	void saveHighScore();
-	void readHighscore();
-
-	void checkIngredient();
 	void createNumber(int first, int second);
+	int combine(int x, int y);
 
 	void keyboard(unsigned char key, int x, int y);
 };

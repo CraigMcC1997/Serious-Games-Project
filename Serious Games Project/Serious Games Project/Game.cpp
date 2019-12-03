@@ -2,17 +2,16 @@
 
 void Game::init()
 {
-	int windowWidth = glutGet(GLUT_SCREEN_WIDTH) - 100;
-	int windowHeight = glutGet(GLUT_SCREEN_HEIGHT) - 100;
-
 	window = new WindowMaker("Serious Games Coursework", 800, 600,
 		glutGet(GLUT_SCREEN_WIDTH) / 2 - windowWidth / 2, glutGet(GLUT_SCREEN_HEIGHT) / 2 - windowHeight / 2); //placing the window in the middle of the monitor
 
-	//samples = ;	//array of sound  files
+	//array of sound  files
 	samples[0] = Sound::loadSample("../Resources/SoundFiles/Click.wav", BASS_SAMPLE_OVER_POS);	//adding sound files to the array to be played later in code
 	samples[1] = Sound::loadSample("../Resources/SoundFiles/Click2.wav", BASS_SAMPLE_OVER_POS);	//adding sound files to the array to be played later in code
 
-	cocktail->init();
+	ingredients->createListOfIngredients();
+	ingredients->removeDuplicates();
+	displayIngredients();
 
 	cout << "Chose which ingredients are in the cocktail displayed" << endl;
 }
@@ -25,42 +24,89 @@ void Game::drawString(void* font, float x, float y, string s)
 		glutBitmapCharacter(font, s[i]);
 }
 
-void Game::saveHighScore()
+bool Game::allIngredientsFound()
 {
-	readHighscore();	//read in & save the current HighScore
-
-	if (currentScore > highScore)	//check that the current score isnt bigger than the saved score
+	if (ingredients->getCocktail()->getIngredients().empty())
 	{
-		highScore = currentScore;	//if so, update the highscore
-		
-		outFile.open("../Resources/Highscore.txt");
-		if (outFile.is_open())
-			outFile << highScore;
-		else cout << "Unable to open file";
-		outFile.close();
+		foundAll = true;
+		cout << "Finished" << endl;
 	}
-	cout << "saved" << endl;
+
+	else
+	{
+		foundAll = false;
+		cout << "Keep going" << endl;
+	}
+
+	return foundAll;
 }
 
-void Game::readHighscore()
+void Game::displayIngredients()
 {
-	//opeing file and storing details as variables WRONG INGREDIENTS
-	infile = ifstream("../Resources/Highscore.txt");	//finding new file from directory
-	if (infile.is_open())
+	int count = 1;
+	float textX = -1.3f;
+	float textY = 0.5f;
+	string display;
+
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, textX, textY, "Possible Ingredients: ");
+
+	for (int i = 0; i < ingredients->getGuessingIngredients().size(); i++)
 	{
-		infile >> highScore;
-		cout << highScore << endl;
-		infile.close();
+		if (textY >= -0.2f)
+		{
+			display += to_string(count) += ". " + ingredients->getGuessingIngredients()[i];		//what text will be displayed
+			textY -= 0.1f;													//moving text down
+			drawString(GLUT_BITMAP_TIMES_ROMAN_24, textX, textY, display);	//draw text
+			//createHitbox(guessIngredients[i], textX, textY);
+			count++;														//Increase count
+			display = "";													//reset string
+		}
+		if (textY <= -0.2f)												//if text gets below screen
+		{																//move text up and across
+			textY = 0.5f;
+			textX += 0.8f;
+		}
 	}
-	else cout << "Unable to open file";
+	count = 1;
+
+	textX = -1.3f;
+	textY = -0.7f;
+
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, textX, textY, "Correct Ingredients: ");
+
+	if (correctChoices.size() != 0) {
+		for (int i = 0; i < correctChoices.size(); i++)
+		{
+			display += to_string(count) += ". " + correctChoices[i];		//what text will be displayed
+			textY -= 0.1f;													//moving text down
+			drawString(GLUT_BITMAP_TIMES_ROMAN_24, textX, textY, display);	//draw text
+			//createHitbox(guessIngredients[i], textX, textY);
+			count++;														//Increase count
+			display = "";													//reset string
+
+			if (textY <= -0.9f)												//if text gets below screen
+			{																//move text up and across
+				textY = -0.7f;
+				textX += 0.8f;
+			}
+		}
+	}
+}
+
+void Game::setUp()
+{
+	correctChoices.clear();
+	ingredients->getCocktail()->getCorrectCocktail();
+	ingredients->createListOfIngredients();
+	ingredients->removeDuplicates();
+	ingredients->getCocktail()->displayCorrectCocktail();
+	displayIngredients();
 }
 
 void Game::update(float dt)
 {
 	POINT mousePos;
 	GetCursorPos(&mousePos);//tracking the mouse position
-
-	cocktail->update();
 
 	//checking if mouse is inside window
 	if (mousePos.x > (window->getXPos()) && mousePos.x < (window->getXPos() + window->getWidth()) &&
@@ -76,13 +122,17 @@ void Game::update(float dt)
 		alive = false;
 	}
 	
-	if (cocktail->getCocktailsComplete() >= 3)
+	if (score->getCorrectCocktails() >= 3)
 	{
 		alive = false;
 		win = true;
 	}
 
-	
+	if (ingredients->getCocktail()->getIngredients().empty())
+	{
+		score->updateCocktailsScore(1);
+		setUp();
+	}
 }
 
 //get mouse inputs
@@ -119,39 +169,54 @@ void Game::mouseInput()
 
 void Game::createNumber(int numOne, int numTwo)
 {
-	string temp;
+	int numChoice = 0;
+	stringstream temp;
 
 	if (numOne != NULL)
+		temp << to_string(numOne);
+	
+	if (numTwo != NULL)
 	{
-		temp = to_string(numOne);
-		cout << temp << endl;
-
-		if (numTwo != NULL)
-		{
-			temp += to_string(numTwo);
-			cout << temp << endl;
-		}
-		
-		stringstream stringToInt(temp);
-		stringToInt >> numChoice;
-
-		first = NULL;
-		second = NULL;
-
-		checkIngredient();
+		temp << to_string(numTwo);
 	}
-	else
-		cout << "both values NULL" << endl;
+
+	temp >> numChoice;
+
+	cout << "numChoice: " << numChoice << endl;
+
+	first = NULL;
+	second = NULL;
+
+	if(numChoice <= ingredients->getGuessingIngredients().size())
+		checkIngredient(numChoice - 1);
 }
 
-void Game::checkIngredient()
+void Game::checkIngredient(int choice)
 {
-	if (cocktail->checkIngredient(numChoice - 1))
+	string ingredient = ingredients->getGuessingIngredients()[choice];
+	vector<string> correctIngredients = ingredients->getCocktail()->getIngredients();
+	
+	if (!ingredients->getCocktail()->getIngredients().empty())
 	{
-		currentScore++;
+		if (find(correctIngredients.begin(), correctIngredients.end(), ingredient) != correctIngredients.end())
+		{
+			correctChoices.push_back(ingredients->getGuessingIngredients()[choice]);
+			ingredients->removeIngredient(ingredient);
+			score->updateIngredientScore(1);	//increment ingredient score by 1
+		}
+		else
+			lives--;
 	}
-	else
-		lives--;
+}
+
+int Game::combine(int x, int y)
+{
+    int z;
+    if(y >= 10)
+        x *= 10;
+    x *= 10;
+    z = x + y;
+    return z;
 }
 
 void Game::keyboard(unsigned char key, int x, int y)
@@ -166,6 +231,7 @@ void Game::keyboard(unsigned char key, int x, int y)
 				first = 0;
 			else
 				second = 0;
+				first = combine(first, second);
 		}
 		break;
 		case '1':
@@ -241,7 +307,7 @@ void Game::keyboard(unsigned char key, int x, int y)
 		}
 		break;
 		case 's':
-			saveHighScore();
+			score->saveHighScore();
 			break;
 		default:
 			cout << "incorrect key" << endl;
@@ -260,23 +326,24 @@ void Game::ReshapeWindow(int width, int height)
 
 void Game::drawAlive()
 {
-	cocktail->draw();
-	drawString(GLUT_BITMAP_TIMES_ROMAN_24, 0.9, 0.9, "Lives: " + to_string(lives));	//draw text
-	drawString(GLUT_BITMAP_TIMES_ROMAN_24, 0.9, 0.8, "Score: " + to_string(currentScore));	//draw text
-	drawString(GLUT_BITMAP_TIMES_ROMAN_24, 0.9, 0.7, "Complete: " + to_string(cocktail->getCocktailsComplete()));	//draw text
+	ingredients->getCocktail()->draw();
+	displayIngredients();
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, 0.8, 0.9, "Lives: " + to_string(lives));	//draw text
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, 0.8, 0.8, "ingredients: " + to_string(score->getCorrectIngredients()));	//draw text
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, 0.8, 0.7, "Complete: " + to_string(score->getCorrectCocktails()));	//draw text
 }
 
 void Game::drawDead()
 {
 	drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.9, "Lives: " + to_string(lives));	//draw text
-	drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.8f, "Score: " + to_string(currentScore));	//draw text
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.8f, "ingredients: " + to_string(score->getCorrectIngredients()));	//draw text
 	drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.7f, "Press 's' to save score");	//draw text
 }
 
 void Game::drawWin()
 {
 	drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.9, "Well done! you got " 
-		+ to_string(cocktail->getCocktailsComplete()) + " cocktails correct in a row!" 
+		+ to_string(score->getCorrectCocktails()) + " cocktails correct in a row!"
 		+ "YOU WIN!");	//draw text
 }
 

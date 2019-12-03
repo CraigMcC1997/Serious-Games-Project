@@ -129,6 +129,8 @@
   <ItemGroup>
     <ClCompile Include="Cocktail.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GuessingIngredients.cpp" />
+    <ClCompile Include="HighScore.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlaySound.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -138,6 +140,8 @@
     <ClInclude Include="bass.h" />
     <ClInclude Include="Cocktail.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GuessingIngredients.h" />
+    <ClInclude Include="HighScore.h" />
     <ClInclude Include="PlaySound.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="WindowMaker.h" />

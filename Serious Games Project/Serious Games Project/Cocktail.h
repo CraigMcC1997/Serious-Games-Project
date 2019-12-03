@@ -4,12 +4,12 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <fstream>
 #include <sstream>
 #include <SDL_ttf.h>
 #include <algorithm>
 #include <time.h> 
 #include <algorithm>
+#include <fstream>
 
 using namespace std;
 
@@ -17,21 +17,13 @@ class Cocktail
 {
 private:
 	string name;	//selected cocktail
+	string ingredient;
+	vector<string> correctIngredients;
+
 	ifstream infile;	//file which holds cocktail ingredients
 	ofstream outFile;
-	string ingredient;
-	int cocktailsComplete = 0;
 
-	bool foundAll = false;
-
-	static int const MAX_SIZE = 9;	//max size of the array of cocktails
-	int numberOfCorrectIngredients;
-	int numberOfOtherIngredients = sizeof(otherIngredients) / sizeof(otherIngredients[0]);	//actual size of array
-	int numberOfGuessingIngredients = numberOfCorrectIngredients + numberOfOtherIngredients;
-
-	
-
-	string const cocktails[MAX_SIZE] =
+	vector<string> cocktails =
 	{
 		"Zombie",
 		"Pina Colada",
@@ -44,32 +36,17 @@ private:
 		"Gin N Juice"
 	};
 
-	vector<string> otherIngredients;
-	vector<string> correctIngredients;
-	vector<string> guessIngredients;
-	vector<string> correctChoices;
-
-	void removeIngredient(string choice);
-
 public:
 	void init();
-	void update();
 	void draw();
 
 	void getCorrectCocktail();
-	void inputOtherIngredients();
-	void createListOfIngredients();
-	void removeDuplicates();
 	void displayCorrectCocktail();
-	void displayIngredients();
-	bool allIngredientsFound();
+	void updateCocktailContainer(vector<string>);
+	void RemovePossibleCocktail(string);
 
 	string getName();
 	vector<string> getIngredients();
 	void drawString(void* font, float x, float y, string s);
-	bool checkIngredient(int choice);
-	int getCocktailsComplete();
-
-	void setUp();
 };
 
