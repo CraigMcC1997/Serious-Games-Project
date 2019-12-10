@@ -1,11 +1,5 @@
 #include "Cocktail.h"
 
-void Cocktail::init()
-{
-	getCorrectCocktail();
-	displayCorrectCocktail();
-}
-
 //Takes a font, position and text and draws this to screen
 void Cocktail::drawString(void* font, float x, float y, string s)
 {
@@ -73,6 +67,11 @@ void Cocktail::RemovePossibleCocktail(string cocktail)
 		cout << count << ". " << *i << endl;
 		count++;
 	}
+}
+
+int Cocktail::getCocktailsSize()
+{
+	return cocktails.size();
 }
 
 string Cocktail::getName()

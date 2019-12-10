@@ -25,7 +25,6 @@ void GuessingIngredients::inputWrongIngredients()
 void GuessingIngredients::createListOfIngredients()
 {
 	inputWrongIngredients();
-
 	vector<string> temp = cocktail->getIngredients();
 
 	guessIngredients.insert(guessIngredients.end(), temp.begin(), temp.end());

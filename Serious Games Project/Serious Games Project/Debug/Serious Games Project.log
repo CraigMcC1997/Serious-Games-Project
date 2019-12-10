@@ -1,16 +1,21 @@
-﻿  Game.cpp
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(25,21): warning C4018: '<': signed/unsigned mismatch
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(55,20): warning C4018: '<': signed/unsigned mismatch
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(80,21): warning C4018: '<': signed/unsigned mismatch
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(192,15): warning C4018: '<=': signed/unsigned mismatch
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(337,79): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(338,110): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(339,105): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(344,80): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(345,112): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(346,78): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  Cocktail.cpp
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Cocktail.cpp(7,21): warning C4018: '<': signed/unsigned mismatch
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Cocktail.cpp(14,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Game.cpp
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Cocktail.cpp(90,68): warning C4305: 'argument': truncation from 'double' to 'float'
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(33,21): warning C4018: '<': signed/unsigned mismatch
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(63,20): warning C4018: '<': signed/unsigned mismatch
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(88,21): warning C4018: '<': signed/unsigned mismatch
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(147,15): warning C4018: '<=': signed/unsigned mismatch
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(292,79): warning C4305: 'argument': truncation from 'double' to 'float'
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(293,110): warning C4305: 'argument': truncation from 'double' to 'float'
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(294,105): warning C4305: 'argument': truncation from 'double' to 'float'
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(299,80): warning C4305: 'argument': truncation from 'double' to 'float'
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(300,112): warning C4305: 'argument': truncation from 'double' to 'float'
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(301,78): warning C4305: 'argument': truncation from 'double' to 'float'
+  GuessingIngredients.cpp
   main.cpp
-E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(359,15): warning C4305: 'argument': truncation from 'double' to 'float'
+E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\Game.cpp(314,15): warning C4305: 'argument': truncation from 'double' to 'float'
   Generating Code...
 E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Serious Games Project\main.cpp(46,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Serious Games Project.vcxproj -> E:\1. University\Year 4 (Honours Year)\Term 1\Serious Games\repo\Serious Games Project\Debug\Serious Games Project.exe

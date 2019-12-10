@@ -11,11 +11,19 @@ void Game::init()
 	samples[2] = Sound::loadSample("../Resources/SoundFiles/clapping.wav", BASS_SAMPLE_OVER_POS);
 	samples[3] = Sound::loadSample("../Resources/SoundFiles/loss.wav", BASS_SAMPLE_OVER_POS);
 
-	ingredients->createListOfIngredients();
-	ingredients->removeDuplicates();
-	displayIngredients();
+	setUp();
 
 	cout << "Chose which ingredients are in the cocktail displayed" << endl;
+}
+
+void Game::setUp()
+{
+	correctChoices.clear();
+	ingredients->getCocktail()->getCorrectCocktail();
+	ingredients->createListOfIngredients();
+	ingredients->removeDuplicates();
+	ingredients->getCocktail()->displayCorrectCocktail();
+	displayIngredients();
 }
 
 //Takes a font, position and text and draws this to screen
@@ -95,36 +103,15 @@ void Game::displayIngredients()
 	}
 }
 
-void Game::setUp()
-{
-	correctChoices.clear();
-	ingredients->getCocktail()->getCorrectCocktail();
-	ingredients->createListOfIngredients();
-	ingredients->removeDuplicates();
-	ingredients->getCocktail()->displayCorrectCocktail();
-	displayIngredients();
-}
-
 void Game::update(float dt)
 {
-	//POINT mousePos;
-	//GetCursorPos(&mousePos);//tracking the mouse position
-
-	//checking if mouse is inside window
-	//if (mousePos.x > (window->getXPos()) && mousePos.x < (window->getXPos() + window->getWidth()) &&
-	//	mousePos.y >(window->getYPos()) && mousePos.y < (window->getYPos() + window->getHeight()))
-	//{
-	//	//get mouse inputs
-	//	mouseInput();
-	//}
-	
 	if (lives <= 0)
 	{
 		lives = 0;
 		alive = false;
 	}
 	
-	if (score->getCorrectCocktails() >= 3)
+	if (score->getCorrectCocktails() >= ingredients->getCocktail()->getCocktailsSize())
 	{
 		alive = false;
 		win = true;
@@ -136,38 +123,6 @@ void Game::update(float dt)
 		setUp();
 	}
 }
-
-////get mouse inputs
-//void Game::mouseInput()
-//{
-//	//left mouse button
-//	if ((GetKeyState(VK_LBUTTON) & 0x80) != 0)
-//	{
-//		if (!leftPressed)
-//		{
-//			leftPressed = true;
-//			cout << "left pressed" << endl;
-//			Sound::playSample(samples[0]);
-//			//cocktail->checkIngredient("Lime");
-//		}
-//	}
-//	else
-//		leftPressed = false;
-//
-//	//right mouse button
-//	if ((GetKeyState(VK_RBUTTON) & 0x80) != 0)
-//	{
-//		if (!rightPressed)
-//		{
-//			rightPressed = true;
-//			cout << "right pressed" << endl;
-//			Sound::playSample(samples[1]);
-//			//cocktail->checkIngredient("Lime");
-//		}
-//	}
-//	else
-//		rightPressed = false;
-//}
 
 void Game::createNumber(int numOne, int numTwo)
 {

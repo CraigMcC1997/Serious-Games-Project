@@ -30,7 +30,7 @@ private:
 
 	bool mouseActive = false, leftPressed = false, rightPressed = false;	//used for mouse inputs
 	
-	int lives = 0;
+	int lives = 3;
 	bool alive = true, win = false, playClapping = false, playLoss = false;
 
 	//used for labels
@@ -61,7 +61,6 @@ public:
 	void update(float dt);
 	void draw();
 	void setUp();
-	void mouseInput();
 	void ReshapeWindow(int weigth, int height);
 	
 	

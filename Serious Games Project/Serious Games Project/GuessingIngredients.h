@@ -21,7 +21,7 @@ private:
 public:
 	GuessingIngredients()
 	{
-		cocktail->init();
+		//cocktail->init();
 	};
 
 	void inputWrongIngredients();

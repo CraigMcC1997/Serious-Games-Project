@@ -44,6 +44,7 @@ public:
 	void displayCorrectCocktail();
 	void updateCocktailContainer(vector<string>);
 	void RemovePossibleCocktail(string);
+	int getCocktailsSize();
 
 	string getName();
 	vector<string> getIngredients();
