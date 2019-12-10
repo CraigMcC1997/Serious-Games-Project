@@ -6,8 +6,10 @@ void Game::init()
 		glutGet(GLUT_SCREEN_WIDTH) / 2 - windowWidth / 2, glutGet(GLUT_SCREEN_HEIGHT) / 2 - windowHeight / 2); //placing the window in the middle of the monitor
 
 	//array of sound  files
-	samples[0] = Sound::loadSample("../Resources/SoundFiles/Click.wav", BASS_SAMPLE_OVER_POS);	//adding sound files to the array to be played later in code
-	samples[1] = Sound::loadSample("../Resources/SoundFiles/Click2.wav", BASS_SAMPLE_OVER_POS);	//adding sound files to the array to be played later in code
+	samples[0] = Sound::loadSample("../Resources/SoundFiles/correct.wav", BASS_SAMPLE_OVER_POS);	//adding sound files to the array to be played later in code
+	samples[1] = Sound::loadSample("../Resources/SoundFiles/wrong.wav", BASS_SAMPLE_OVER_POS);	
+	samples[2] = Sound::loadSample("../Resources/SoundFiles/clapping.wav", BASS_SAMPLE_OVER_POS);
+	samples[3] = Sound::loadSample("../Resources/SoundFiles/loss.wav", BASS_SAMPLE_OVER_POS);
 
 	ingredients->createListOfIngredients();
 	ingredients->removeDuplicates();
@@ -105,16 +107,16 @@ void Game::setUp()
 
 void Game::update(float dt)
 {
-	POINT mousePos;
-	GetCursorPos(&mousePos);//tracking the mouse position
+	//POINT mousePos;
+	//GetCursorPos(&mousePos);//tracking the mouse position
 
 	//checking if mouse is inside window
-	if (mousePos.x > (window->getXPos()) && mousePos.x < (window->getXPos() + window->getWidth()) &&
-		mousePos.y >(window->getYPos()) && mousePos.y < (window->getYPos() + window->getHeight()))
-	{
-		//get mouse inputs
-		mouseInput();
-	}
+	//if (mousePos.x > (window->getXPos()) && mousePos.x < (window->getXPos() + window->getWidth()) &&
+	//	mousePos.y >(window->getYPos()) && mousePos.y < (window->getYPos() + window->getHeight()))
+	//{
+	//	//get mouse inputs
+	//	mouseInput();
+	//}
 	
 	if (lives <= 0)
 	{
@@ -135,37 +137,37 @@ void Game::update(float dt)
 	}
 }
 
-//get mouse inputs
-void Game::mouseInput()
-{
-	//left mouse button
-	if ((GetKeyState(VK_LBUTTON) & 0x80) != 0)
-	{
-		if (!leftPressed)
-		{
-			leftPressed = true;
-			cout << "left pressed" << endl;
-			Sound::playSample(samples[0]);
-			//cocktail->checkIngredient("Lime");
-		}
-	}
-	else
-		leftPressed = false;
-
-	//right mouse button
-	if ((GetKeyState(VK_RBUTTON) & 0x80) != 0)
-	{
-		if (!rightPressed)
-		{
-			rightPressed = true;
-			cout << "right pressed" << endl;
-			Sound::playSample(samples[1]);
-			//cocktail->checkIngredient("Lime");
-		}
-	}
-	else
-		rightPressed = false;
-}
+////get mouse inputs
+//void Game::mouseInput()
+//{
+//	//left mouse button
+//	if ((GetKeyState(VK_LBUTTON) & 0x80) != 0)
+//	{
+//		if (!leftPressed)
+//		{
+//			leftPressed = true;
+//			cout << "left pressed" << endl;
+//			Sound::playSample(samples[0]);
+//			//cocktail->checkIngredient("Lime");
+//		}
+//	}
+//	else
+//		leftPressed = false;
+//
+//	//right mouse button
+//	if ((GetKeyState(VK_RBUTTON) & 0x80) != 0)
+//	{
+//		if (!rightPressed)
+//		{
+//			rightPressed = true;
+//			cout << "right pressed" << endl;
+//			Sound::playSample(samples[1]);
+//			//cocktail->checkIngredient("Lime");
+//		}
+//	}
+//	else
+//		rightPressed = false;
+//}
 
 void Game::createNumber(int numOne, int numTwo)
 {
@@ -203,9 +205,13 @@ void Game::checkIngredient(int choice)
 			correctChoices.push_back(ingredients->getGuessingIngredients()[choice]);
 			ingredients->removeIngredient(ingredient);
 			score->updateIngredientScore(1);	//increment ingredient score by 1
+			Sound::playSample(samples[0]);
 		}
 		else
+		{
 			lives--;
+			Sound::playSample(samples[1]);
+		}
 	}
 }
 
@@ -329,7 +335,7 @@ void Game::drawAlive()
 	ingredients->getCocktail()->draw();
 	displayIngredients();
 	drawString(GLUT_BITMAP_TIMES_ROMAN_24, 0.8, 0.9, "Lives: " + to_string(lives));	//draw text
-	drawString(GLUT_BITMAP_TIMES_ROMAN_24, 0.8, 0.8, "ingredients: " + to_string(score->getCorrectIngredients()));	//draw text
+	drawString(GLUT_BITMAP_TIMES_ROMAN_24, 0.8, 0.8, "Ingredients: " + to_string(score->getCorrectIngredients()));	//draw text
 	drawString(GLUT_BITMAP_TIMES_ROMAN_24, 0.8, 0.7, "Complete: " + to_string(score->getCorrectCocktails()));	//draw text
 }
 
@@ -338,13 +344,25 @@ void Game::drawDead()
 	drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.9, "Lives: " + to_string(lives));	//draw text
 	drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.8f, "ingredients: " + to_string(score->getCorrectIngredients()));	//draw text
 	drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.7f, "Press 's' to save score");	//draw text
+	
+	if (!playLoss)
+	{
+		playLoss = true;
+		Sound::playSample(samples[3]);
+	}
 }
 
 void Game::drawWin()
 {
 	drawString(GLUT_BITMAP_TIMES_ROMAN_24, -1.3, 0.9, "Well done! you got " 
-		+ to_string(score->getCorrectCocktails()) + " cocktails correct in a row!"
+		+ to_string(score->getCorrectCocktails()) + " cocktails correct in a row! "
 		+ "YOU WIN!");	//draw text
+	
+	if (!playClapping)
+	{
+		playClapping = true;
+		Sound::playSample(samples[2]);
+	}
 }
 
 void Game::draw()

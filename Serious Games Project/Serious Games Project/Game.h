@@ -30,15 +30,14 @@ private:
 
 	bool mouseActive = false, leftPressed = false, rightPressed = false;	//used for mouse inputs
 	
-	int lives = 3;
-	bool alive = true; bool win = false;
+	int lives = 0;
+	bool alive = true, win = false, playClapping = false, playLoss = false;
 
 	//used for labels
 	TTF_Font* textFont;
 
 	//array of Labels
 	GLuint labels[5];
-	GLuint textures[5];
 
 	//Used by BASS library
 	HSAMPLE* samples = new HSAMPLE[5];
