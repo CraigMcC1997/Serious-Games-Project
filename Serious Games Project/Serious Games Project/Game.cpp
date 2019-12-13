@@ -2,7 +2,7 @@
 
 void Game::init()
 {
-	window = new WindowMaker("Serious Games Coursework", 800, 600,
+	window = new WindowMaker("Serious Games Coursework", 1400, 1200,
 		glutGet(GLUT_SCREEN_WIDTH) / 2 - windowWidth / 2, glutGet(GLUT_SCREEN_HEIGHT) / 2 - windowHeight / 2); //placing the window in the middle of the monitor
 
 	//array of sound  files
@@ -109,6 +109,7 @@ void Game::update(float dt)
 	{
 		lives = 0;
 		alive = false;
+		win = false;
 	}
 	
 	if (score->getCorrectCocktails() >= ingredients->getCocktail()->getCocktailsSize())
@@ -182,7 +183,7 @@ int Game::combine(int x, int y)
 
 void Game::keyboard(unsigned char key, int x, int y)
 {
-	if (key != 'a')
+	if (key != 'c')
 	{
 		switch (key)
 		{

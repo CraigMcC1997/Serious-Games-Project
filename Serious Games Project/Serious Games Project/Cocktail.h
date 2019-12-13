@@ -23,21 +23,26 @@ private:
 	ifstream infile;	//file which holds cocktail ingredients
 	ofstream outFile;
 
+	//vector<string> cocktails =
+	//{
+	//	"Zombie",
+	//	"Pina Colada",
+	//	"Classic Mojito",
+	//	"Long Island Iced Tea",
+	//	"Russian Spy",
+	//	"Rumbull",
+	//	"El Matador",
+	//	"Bird Bath",
+	//	"Gin N Juice"
+	//};
 	vector<string> cocktails =
 	{
-		"Zombie",
-		"Pina Colada",
-		"Classic Mojito",
-		"Long Island Iced Tea",
 		"Russian Spy",
 		"Rumbull",
-		"El Matador",
-		"Bird Bath",
 		"Gin N Juice"
 	};
 
 public:
-	void init();
 	void draw();
 
 	void getCorrectCocktail();
