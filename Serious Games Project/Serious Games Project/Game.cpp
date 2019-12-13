@@ -2,7 +2,7 @@
 
 void Game::init()
 {
-	window = new WindowMaker("Serious Games Coursework", 1400, 1200,
+	window = new WindowMaker("Serious Games Coursework", 800, 600,
 		glutGet(GLUT_SCREEN_WIDTH) / 2 - windowWidth / 2, glutGet(GLUT_SCREEN_HEIGHT) / 2 - windowHeight / 2); //placing the window in the middle of the monitor
 
 	//array of sound  files
@@ -13,7 +13,15 @@ void Game::init()
 
 	setUp();
 
-	cout << "Chose which ingredients are in the cocktail displayed" << endl;
+	cout << "\n\n\n" << endl;
+	cout << "--------------------------------------------------------------------------" << endl;
+	cout << "Chose which ingredients are in the cocktail displayed on the game window" << endl;
+	cout << "To chose, click on the game window and input any number between 1-99" << endl;
+	cout << "Once you have made your decision, press 'c' to connfirm choice " << endl;
+	cout << "Repeate this until you have correctly guessed all cocktails" << endl;
+	cout << "Or until you lose all three lives" << endl;
+	cout << "Good Luck!" << endl;
+	cout << "--------------------------------------------------------------------------" << endl;
 }
 
 void Game::setUp()
@@ -22,7 +30,7 @@ void Game::setUp()
 	ingredients->getCocktail()->getCorrectCocktail();
 	ingredients->createListOfIngredients();
 	ingredients->removeDuplicates();
-	ingredients->getCocktail()->displayCorrectCocktail();
+	//ingredients->getCocktail()->displayCorrectCocktail();
 	displayIngredients();
 }
 
@@ -90,7 +98,6 @@ void Game::displayIngredients()
 			display += to_string(count) += ". " + correctChoices[i];		//what text will be displayed
 			textY -= 0.1f;													//moving text down
 			drawString(GLUT_BITMAP_TIMES_ROMAN_24, textX, textY, display);	//draw text
-			//createHitbox(guessIngredients[i], textX, textY);
 			count++;														//Increase count
 			display = "";													//reset string
 
@@ -139,8 +146,6 @@ void Game::createNumber(int numOne, int numTwo)
 	}
 
 	temp >> numChoice;
-
-	cout << "numChoice: " << numChoice << endl;
 
 	first = NULL;
 	second = NULL;

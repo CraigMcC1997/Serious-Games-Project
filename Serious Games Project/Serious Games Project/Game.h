@@ -6,7 +6,6 @@
 #include <mmsystem.h>
 #include "WindowMaker.h"
 #include <SDL.h>
-#include <SDL_ttf.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -33,12 +32,6 @@ private:
 	int lives = 3;
 	bool alive = true, win = false, playClapping = false, playLoss = false;
 
-	//used for labels
-	TTF_Font* textFont;
-
-	//array of Labels
-	GLuint labels[5];
-
 	//Used by BASS library
 	HSAMPLE* samples = new HSAMPLE[5];
 
@@ -52,10 +45,7 @@ private:
 	vector<string> correctChoices;
 
 public:
-	Game game() 
-	{
-	
-	}
+	Game game() {}
 
 	void init();
 	void update(float dt);

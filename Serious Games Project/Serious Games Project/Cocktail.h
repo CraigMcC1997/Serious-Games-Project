@@ -5,7 +5,6 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
-#include <SDL_ttf.h>
 #include <algorithm>
 #include <time.h> 
 #include <algorithm>
@@ -23,22 +22,16 @@ private:
 	ifstream infile;	//file which holds cocktail ingredients
 	ofstream outFile;
 
-	//vector<string> cocktails =
-	//{
-	//	"Zombie",
-	//	"Pina Colada",
-	//	"Classic Mojito",
-	//	"Long Island Iced Tea",
-	//	"Russian Spy",
-	//	"Rumbull",
-	//	"El Matador",
-	//	"Bird Bath",
-	//	"Gin N Juice"
-	//};
 	vector<string> cocktails =
 	{
+		"Zombie",
+		"Pina Colada",
+		"Classic Mojito",
+		"Long Island Iced Tea",
 		"Russian Spy",
 		"Rumbull",
+		"El Matador",
+		"Bird Bath",
 		"Gin N Juice"
 	};
 

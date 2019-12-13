@@ -54,7 +54,7 @@ void GuessingIngredients::removeIngredient(string choice)
 	
 	cocktail->updateCocktailContainer(cocktailIngredients);
 
-	cocktail->displayCorrectCocktail();
+	//cocktail->displayCorrectCocktail();
 }
 
 vector<string> GuessingIngredients::getGuessingIngredients()
